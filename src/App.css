@@ -4,6 +4,7 @@
   padding: 0;
   font-family: "PT Sans", sans-serif;
 }
+::-webkit-scrollbar {display:none;}
 
 .home,
 .services,

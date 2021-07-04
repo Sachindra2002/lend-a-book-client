@@ -27,7 +27,8 @@ function Navbar() {
             <nav className="navbar">
                 <div className="navbar-container">
                     <Link to="/" className="navbar-logo">
-                        <img width="150px" src={logo} alt="Logo"/>
+                        {/* <img width="150px" src={logo} alt="Logo"/> */}
+                        𝐿𝑒𝓃𝒹 𝒶 𝐵𝑜𝑜𝓀
                     </Link>
                     <div className="menu-icon" onClick={handleClick}>
                         <i className={click ? 'fas fa-times' : 'fas fa-bars'}/>
