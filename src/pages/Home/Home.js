@@ -1,4 +1,5 @@
 import React from 'react';
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import '../../App.css';
 import Footer from '../../components/Footer/Footer';
 import HeroSection from '../../components/Hero Section/HeroSection';
@@ -8,10 +9,12 @@ import Navbar from '../../components/Navbar/Navbar';
 function Home () {
     return (
         <>
-            <Navbar />
-            <HeroSection/>
-            <MembershipCard/>
-            <Footer/>
+        <Navbar />
+            <Router>
+                <HeroSection/>
+                <MembershipCard/>
+                <Footer/>   
+            </Router>
         </>
     )
 }

@@ -1,5 +1,4 @@
 import React from 'react'
-import { Button } from '../Button/Button'
 import '../../components/Footer/Footer.css'
 import { Link } from 'react-router-dom';
 
@@ -13,12 +12,12 @@ function Footer() {
                 <p className="footer-subscription-text">
                     You can unsubscribe at any time. 
                 </p>
-                <inpu className="input-areas">
+                <div className="input-areas">
                     <form>
                         <input className="footer-input" type="email" name="email" placeholder='Your Email'/>
-                        <Button ButtonStyle='btn--outline'>Subscribe</Button>
+                        <button className='btn--outline'>Subscribe</button>
                     </form>
-                </inpu>
+                </div>
             </section>
             <div className="footer-links">
                 <div className="footer-link-wrapper">

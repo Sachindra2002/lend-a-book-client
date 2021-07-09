@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import {Link} from 'react-router-dom';
 import { Button } from '../Button/Button';
 import './Navbar.css';
-import logo from '../../Images/logo.png';
+import Home from '../../pages/Home/Home';
+import HeroSection from '../Hero Section/HeroSection';
  
 
 function Navbar() {
@@ -40,17 +41,16 @@ function Navbar() {
                             </Link>
                         </li>
                         <li>
-                            <Link to='/pricing' className='nav-links' onClick={closeMobileMenu}>
-                                Pricing
-                            </Link>
-                        </li>
-                        <li>
                             <Link to='/sign-in' className='nav-links' onClick={closeMobileMenu}>
                                 Sign In
                             </Link>
                         </li>
+                        <li>
+                            <Link to='/register' className='special-button' onClick={closeMobileMenu}>
+                                Sign Up
+                            </Link>
+                        </li>
                     </ul>
-                    {button && <Button buttonStyle='btn--outline'>Admin Login</Button>}
                 </div>
             </nav>
         </>

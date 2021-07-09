@@ -52,9 +52,27 @@ h1 {
   overflow: hidden;
 }
 
-.fade-img {
+/* .fade-img {
   animation-name: fade-img;
   animation-duration: 2s;
+} */
+
+.membership-type-button-design{
+  background-color: #5B75F0;
+  font-size: 20px;
+  color: white;
+  margin-top: 40px;
+  width: 200px;
+  cursor: pointer;
+  height: 40px;
+  border: none;
+  border-radius: 10px;
+}
+
+.membership-type-button{
+  align-items: center;
+  display: flex;
+  margin: 5px 50px;
 }
 
 /* .cards__item__pic-wrap::after {

@@ -39,6 +39,10 @@ function MembershipCardItem(props) {
                             <h3>
                                 {props.point8}
                             </h3>
+                            
+                        </div>
+                        <div className="membership-type-button">
+                            <button className="membership-type-button-design">Choose Plan</button>
                         </div>
                     </div> 
                 </Link>
