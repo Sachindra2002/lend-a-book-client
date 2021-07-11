@@ -15,7 +15,9 @@ function Footer() {
                 <div className="input-areas">
                     <form>
                         <input className="footer-input" type="email" name="email" placeholder='Your Email'/>
+                        <Link to="/#">
                         <button className='btn--outline'>Subscribe</button>
+                        </Link>
                     </form>
                 </div>
             </section>
@@ -23,27 +25,27 @@ function Footer() {
                 <div className="footer-link-wrapper">
                     <div className="footer-link-items">
                         <h2>About Us</h2>
-                        <Link to="/">Testimonials</Link>
-                        <Link to="/">Terms of Service</Link>
+                        <Link to="/#">Testimonials</Link>
+                        <Link to="/#">Terms of Service</Link>
                     </div>
                     <div className="footer-link-items">
                         <h2>Contact Us</h2>
-                        <Link to="/">Contact</Link>
-                        <Link to="/">Support</Link>
+                        <Link to="/#">Contact</Link>
+                        <Link to="/#">Support</Link>
                     </div>
                     <div className="footer-link-items">
                         <h2>Social Media</h2>
-                        <Link to='/'>Instagram</Link>
-                        <Link to='/'>Facebook</Link>
-                        <Link to='/'>Youtube</Link>
-                        <Link to='/'>Twitter</Link>
+                        <Link to='/#'>Instagram</Link>
+                        <Link to='/#'>Facebook</Link>
+                        <Link to='/#'>Youtube</Link>
+                        <Link to='/#'>Twitter</Link>
                     </div>
                 </div>
             </div>
             <section class='social-media'>
                 <div class='social-media-wrap'>
                     <div class='footer-logo'>
-                        <Link to='/' className='social-logo'>
+                        <Link to='/#' className='social-logo'>
                             𝐿𝑒𝓃𝒹 𝒶 𝐵𝑜𝑜𝓀
                         </Link>
                     </div>
@@ -51,7 +53,7 @@ function Footer() {
                     <div class='social-icons'>
                     <Link
                         class='social-icon-link facebook'
-                        to='/'
+                        to='/#'
                         target='_blank'
                         aria-label='Facebook'
                     >
@@ -59,7 +61,7 @@ function Footer() {
                     </Link>
                     <Link
                         class='social-icon-link instagram'
-                        to='/'
+                        to='/#'
                         target='_blank'
                         aria-label='Instagram'
                     >
@@ -67,7 +69,7 @@ function Footer() {
                     </Link>
                      <Link
                         class='social-icon-link youtube'
-                        to='/'
+                        to='/#'
                         target='_blank'
                         aria-label='Youtube'
                      >
@@ -75,7 +77,7 @@ function Footer() {
                     </Link>
                     <Link
                         class='social-icon-link twitter'
-                        to='/'
+                        to='/#'
                         target='_blank'
                         aria-label='Twitter'
                     >
@@ -83,7 +85,7 @@ function Footer() {
                     </Link>
                     <Link
                         class='social-icon-link twitter'
-                        to='/'
+                        to='/#'
                         target='_blank'
                         aria-label='LinkedIn'
                     >

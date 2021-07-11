@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import '../../App.css';
 import './HeroSection.css';
 
@@ -9,10 +10,11 @@ function HeroSection() {
             <h1>A world of books for young and old.</h1>
             <p>Read, Lead, Succeed.</p>
             <div className="hero-btns">
-
+                <Link to="/#">
                 <button className="btn--outline">
                     Sign Up
                 </button>
+                </Link>
             </div>
         </div>
     )
