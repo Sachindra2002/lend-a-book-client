@@ -38,7 +38,7 @@ function Register() {
                 type="radio"
                 id="bronze"
                 name="option"
-                value={values.option}
+                value="bronze"
                 onChange={handleChange}
                 required
                 defaultChecked
@@ -50,7 +50,7 @@ function Register() {
                 type="radio"
                 id="silver"
                 name="option"
-                value={values.option}
+                value="silver"
                 onChange={handleChange}
                 required
               />
@@ -61,7 +61,7 @@ function Register() {
                 type="radio"
                 id="gold"
                 name="option"
-                value={values.option}
+                value="gold"
                 onChange={handleChange}
                 required
               />
@@ -72,7 +72,7 @@ function Register() {
                 type="radio"
                 id="platinum"
                 name="option"
-                value={values.option}
+                value="platinum"
                 onChange={handleChange}
                 required
               />

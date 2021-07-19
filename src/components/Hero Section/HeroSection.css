@@ -41,6 +41,9 @@
   width: 150px;
   border: 1px solid white;
   cursor: pointer;
+  background-color: transparent;
+  color: white;
+  height: 40px;
 }
 
 .hero-btns .btn {
