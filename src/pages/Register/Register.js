@@ -1,31 +1,13 @@
 import React from "react";
+//import {useState} from 'react';
 import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/Navbar/Navbar";
 import "./Register.css";
-import useForm from './useForm'
-import validate from './validateInfo'
+import useForm from "./useForm";
+import validate from "./validateInfo";
 
 function Register() {
-  // const [membershipOption, setMembershipOption] = useState("");
-  // const [firstName, setFirstName] = useState("");
-  // const [lastName, setLastName] = useState("");
-  // const [email, setEmail] = useState("");
-  // const [dob, setDob] = useState("");
-  // const [phonenumber, setPhoneNumber] = useState("");
-  // const [password, setPassword] = useState("");
-
-  // const displayInfo = () => {
-  //   console.log(
-  //     membershipOption +
-  //       firstName +
-  //       lastName +
-  //       email +
-  //       dob +
-  //       phonenumber +
-  //       password
-  //   );
-  // };
-  const {handleChange, values, handleSubmit, errors} = useForm(validate);
+  const { handleChange, values, handleSubmit, errors } = useForm(validate);
   return (
     <>
       <Navbar />
@@ -90,6 +72,7 @@ function Register() {
                 placeholder="Enter first name here"
                 value={values.firstName}
                 onChange={handleChange}
+                required
               />
               {errors.firstName && <p className="error">{errors.firstName}</p>}
             </div>
@@ -101,6 +84,7 @@ function Register() {
                 placeholder="Enter last name here"
                 value={values.lastName}
                 onChange={handleChange}
+                required
               />
               {errors.lastName && <p className="error">{errors.lastName}</p>}
             </div>
@@ -112,6 +96,7 @@ function Register() {
                 placeholder="Enter a valid email"
                 value={values.email}
                 onChange={handleChange}
+                required
               />
               {errors.email && <p className="error">{errors.email}</p>}
             </div>
@@ -125,6 +110,7 @@ function Register() {
                 name="dob"
                 value={values.dob}
                 onChange={handleChange}
+                required
               />
               {errors.dob && <p className="error">{errors.dob}</p>}
             </div>
@@ -133,11 +119,15 @@ function Register() {
               <input
                 type="text"
                 name="phonenumber"
+                maxLength="10"
                 placeholder="Enter your Phone Number"
                 value={values.phonenumber}
                 onChange={handleChange}
+                required
               />
-              {errors.phonenumber && <p className="error">{errors.phonenumber}</p>}
+              {errors.phonenumber && (
+                <p className="error">{errors.phonenumber}</p>
+              )}
             </div>
             <div className="input-box">
               <span className="details">Password</span>
@@ -147,6 +137,7 @@ function Register() {
                 placeholder="Enter a password"
                 value={values.password}
                 onChange={handleChange}
+                required
               />
               {errors.password && <p className="error">{errors.password}</p>}
             </div>
@@ -158,6 +149,7 @@ function Register() {
                 name="password2"
                 value={values.password2}
                 onChange={handleChange}
+                required
               />
               {errors.password2 && <p className="error">{errors.password2}</p>}
             </div>
@@ -172,8 +164,68 @@ function Register() {
               accept="image/*"
             ></input>
           </div>
+          <h2 className="title">Payment Section</h2>
+          <div className="payment-details">
+            <div className="input-box">
+              <span className="details">Enter Credit Card Number</span>
+              <input
+                className="cc-number"
+                type="text"
+                pattern="4\ d{ 12} (\ d{ 3} )?"
+                name="creditNumber"
+                placeholder="Card Number"
+                maxLength="16"
+                value={values.creditNumber}
+                onChange={handleChange}
+                required
+              />
+              {errors.creditNumber && <p className="error">{errors.creditNumber}</p>}
+            </div>
+            <div className="input-box">
+              <span className="details">Enter Expiry Date</span>
+              <input
+                className="cc-expires"
+                type="text"
+                name="creditExpires"
+                maxLength="5"
+                placeholder="MM / YY"
+                value={values.creditExpires}
+                onChange={handleChange}
+                required
+              />
+              {errors.creditExpires && <p className="error">{errors.creditExpires}</p>}
+            </div>
+            <div className="input-box">
+              <span className="details">Enter CCV</span>
+              <input
+                className="cc-cvc"
+                type="text"
+                pattern="\d*"
+                name="creditCvc"
+                maxLength="3"
+                placeholder="CVC"
+                value={values.creditCvc}
+                onChange={handleChange}
+                required
+              />
+              {errors.creditCvc && <p className="error">{errors.creditCvc}</p>}
+            </div>
+            <div className="input-box">
+              <span className="details">Total Amount</span>
+              <input
+                className="amount"
+                id="totalAmount"
+                pattern="\d*"
+                name="totalAmount"
+                value={values.totalAmount}
+                onChange={handleChange}
+                required
+              />
+              
+            </div>
+          </div>
           <button type="submit" className="proceed-to-payment">
-            Proceed to payment
+            Create Account
           </button>
         </form>
       </div>
