@@ -18,7 +18,6 @@
 
 .error {
   color: red;
-  
 }
 
 .subscription-option {
@@ -75,6 +74,10 @@ input[type="radio"]:checked + label::after {
   background: lightseagreen;
 }
 
+.error-text {
+  color: red;
+}
+
 .user-details {
   flex-wrap: wrap;
   margin-top: 50px;
@@ -86,7 +89,7 @@ input[type="radio"]:checked + label::after {
   padding-top: 50px;
 }
 
-.payment-details{
+.payment-details {
   flex-wrap: wrap;
   margin-top: 50px;
   box-shadow: 0 0 10px lightgray, 0 0 30px lightgray;

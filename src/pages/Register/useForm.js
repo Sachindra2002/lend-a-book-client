@@ -2,6 +2,7 @@ import { useState } from "react";
 import Axios from "axios";
 
 const useForm = (validate) => {
+
   const [values, setValues] = useState({
     option: "",
     firstName: "",
@@ -30,17 +31,28 @@ const useForm = (validate) => {
     e.preventDefault();
     const { name, value } = e.target;
     setErrors(validate(values));
-    Axios.post("http://localhost:5000/signup", {
+    Axios.post("/signup", {
       ...values,
       [name]: value,
     })
-      .then((response) => {
-        console.log(response);
-         
+      .then(function (response) {
+        alert("Account created successfully");
       })
-      .catch(err => {
+      .catch(function (err) {
+        try {
+          if (err.response.status === 400) {
+            alert("Email already in use");
+          } else if (err.response.status === 500) {
+            alert("Something went wrong when registering");
+          } else {
+            alert("Could not connect to server");
+          }
+        } catch (Exception) {
+          alert("Could not connect to server");     
+        }
+
         console.log(err);
-      }) 
+      });
   };
 
   return { handleChange, values, handleSubmit, errors };

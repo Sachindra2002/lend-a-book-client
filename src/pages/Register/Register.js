@@ -179,7 +179,9 @@ function Register() {
                 onChange={handleChange}
                 required
               />
-              {errors.creditNumber && <p className="error">{errors.creditNumber}</p>}
+              {errors.creditNumber && (
+                <p className="error">{errors.creditNumber}</p>
+              )}
             </div>
             <div className="input-box">
               <span className="details">Enter Expiry Date</span>
@@ -193,7 +195,9 @@ function Register() {
                 onChange={handleChange}
                 required
               />
-              {errors.creditExpires && <p className="error">{errors.creditExpires}</p>}
+              {errors.creditExpires && (
+                <p className="error">{errors.creditExpires}</p>
+              )}
             </div>
             <div className="input-box">
               <span className="details">Enter CCV</span>
@@ -214,14 +218,13 @@ function Register() {
               <span className="details">Total Amount</span>
               <input
                 className="amount"
+                placeholder="Total"
                 id="totalAmount"
-                pattern="\d*"
                 name="totalAmount"
-                value={values.totalAmount}
-                onChange={handleChange}
+                value=""
                 required
+                readOnly
               />
-              
             </div>
           </div>
           <button type="submit" className="proceed-to-payment">

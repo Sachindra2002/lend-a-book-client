@@ -3,9 +3,6 @@ import { Link } from "react-router-dom";
 import "../MembershipCards/MembershipCard.css";
 
 function MembershipCardItem(props) {
-  const redirectRegister = () => {
-    alert("You have clicked " + props.text);
-  }
   return (
     <>
       <li className="cards__item">
@@ -23,15 +20,14 @@ function MembershipCardItem(props) {
               <h3>{props.point6}</h3>
               <h3>{props.point7}</h3>
               <h3>{props.point8}</h3>
+              <h3>{props.point9}</h3>
             </div>
             <div className="membership-type-button">
-              <button
-                onClick={redirectRegister}
-                option={props.text}
-                className="membership-type-button-design"
-              >
-                Choose Plan
-              </button>
+              <Link to='/register'>
+                <button className="membership-type-button-design">
+                  Choose Plan
+                </button>
+              </Link>
             </div>
           </div>
         </Link>

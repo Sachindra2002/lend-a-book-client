@@ -19,6 +19,7 @@ function MembershipCard() {
                             point6="▸ Charges for a video - 100 LKR"
                             point7="▸ Overdue charges per day - 20 LKR"
                             point8="▸ Annual membership fee - 1000LKR"
+                            point9="▸ Registration fee - 2000LKR"
                         />
                         <MembershipCardItem
                             text="Silver"
@@ -31,6 +32,8 @@ function MembershipCard() {
                             point6="▸ Charges for a video - 80 LKR"
                             point7="▸ Overdue charges per day - 15 LKR"
                             point8="▸ Annual membership fee - 2000 LKR"
+                            point9="▸ Registration fee - 2000LKR"
+                            
                         />
                         <MembershipCardItem
                             text="Gold"
@@ -43,6 +46,7 @@ function MembershipCard() {
                             point6="▸ Charges for a video - 60 LKR"
                             point7="▸ Overdue charges per day - 10 LKR"
                             point8="▸ Annual membership fee - 3000 LKR"
+                            point9="▸ Registration fee - 2000LKR"
                         />
                         <MembershipCardItem
                             text="Platinum"
@@ -55,6 +59,7 @@ function MembershipCard() {
                             point6="▸ Charges for a video - 40 LKR"
                             point7="▸ Overdue charges per day - 5 LKR"
                             point8="▸ Annual membership fee - 5000 LKR"
+                            point9="▸ Registration fee - 2000LKR"
                         />
                     </ul>
                 </div>

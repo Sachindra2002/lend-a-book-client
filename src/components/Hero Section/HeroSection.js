@@ -10,7 +10,7 @@ function HeroSection() {
             <h1>A world of books for young and old.</h1>
             <p>Read, Lead, Succeed.</p>
             <div className="hero-btns">
-                <Link to="/#">
+                <Link to="/register">
                 <button className="btn--outline">
                     Sign Up
                 </button>

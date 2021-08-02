@@ -7,6 +7,11 @@ h1 {
   text-align: center;
 }
 
+h3{
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
 .cards__container {
   display: flex;
   flex-flow: column;
