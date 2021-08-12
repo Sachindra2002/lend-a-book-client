@@ -6,7 +6,7 @@ function MembershipCardItem(props) {
   return (
     <>
       <li className="cards__item">
-        <Link className="cards__item__link" to={props.path}>
+        <div className="cards__item__link">
           <div className="cards__item__info">
             <h2 className="cards__item__text" style={{ color: props.colour }}>
               {props.text}
@@ -30,7 +30,7 @@ function MembershipCardItem(props) {
               </Link>
             </div>
           </div>
-        </Link>
+        </div>
       </li>
     </>
   );

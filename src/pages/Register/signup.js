@@ -3,7 +3,7 @@ import { Form } from "react-bootstrap";
 import PropTypes from "prop-types";
 import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/Navbar/Navbar";
-import "./Register.css";
+import "./signup.css";
 
 //REDUX
 import { connect } from "react-redux";
@@ -22,6 +22,7 @@ function Register(props) {
   const [creditCardExpiryDate, setCreditCardExpiryDate] = useState("");
   const [creditCardCvv, setCreditCardCvv] = useState("");
   const [totalAmount, setTotalAmount] = useState("");
+  const [file, setFile] = useState();
   const [errors, setErrors] = useState({});
 
   //Function to generate form control inputs for each field
@@ -66,27 +67,27 @@ function Register(props) {
   const handleSubmit = (event) => {
     //prevent page from loading
     event.preventDefault();
-    const data = {
-      option,
-      email,
-      firstName,
-      lastName,
-      dob,
-      phoneNumber,
-      password,
-      confirmPassword,
-      creditCardNumber,
-      creditCardExpiryDate,
-      creditCardCvv,
-      totalAmount,
-    };
+
+    const data = new FormData();
+    data.append("option", option);
+    data.append("email", email);
+    data.append("firstName", firstName);
+    data.append("lastName", lastName);
+    data.append("dob", dob);
+    data.append("phoneNumber", phoneNumber);
+    data.append("password", password);
+    data.append("confirmPassword", confirmPassword);
+    data.append("creditCardNumber", creditCardNumber);
+    data.append("creditCardExpiryDate", creditCardExpiryDate);
+    data.append("creditCardCvv", creditCardCvv);
+    data.append("totalAmount", totalAmount);
+    data.append("file", file);
 
     //Use user input to register user
     props.registerUser(data, props.history);
   };
 
-  //Generate fields usinf function
-
+  //Generate fields using function
   const emailInput = useInput({
     type: "email",
     value: email,
@@ -149,7 +150,8 @@ function Register(props) {
     placeholder: "0000-0000-0000-0000",
     changeHandler: setCreditCardNumber,
     id: "creditCardNumber",
-    pattern: "^(?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})$"
+    pattern:
+      "^(?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35d{3})d{11})$",
   });
 
   const creditCardExpiryDateInput = useInput({
@@ -159,7 +161,7 @@ function Register(props) {
     placeholder: "mm/dd",
     changeHandler: setCreditCardExpiryDate,
     id: "creditCardExpiryDate",
-    pattern: "/^[0-9]{3,4}$/",
+    //pattern: "/^[0-9]{3,4}$/",
   });
 
   const creditCardCvvInput = useInput({
@@ -185,7 +187,7 @@ function Register(props) {
       <Navbar />
       <div className="container">
         <div className="title">Create a new account</div>
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit} encType="multipart/form-data">
           <div className="subscription-option">
             <div className="options">
               <input
@@ -194,7 +196,7 @@ function Register(props) {
                 name="option"
                 value="bronze"
                 onChange={() => setOption("bronze")}
-                onClick = {() => setTotalAmount("3000 LKR")}
+                onClick={() => setTotalAmount("3000 LKR")}
                 required
                 defaultChecked
               />
@@ -207,7 +209,7 @@ function Register(props) {
                 name="option"
                 value="silver"
                 onChange={() => setOption("silver")}
-                onClick = {() => setTotalAmount("4000 LKR")}
+                onClick={() => setTotalAmount("4000 LKR")}
                 required
               />
               <label htmlFor="silver" style={{ color: "#C0C0C0" }}>
@@ -219,7 +221,7 @@ function Register(props) {
                 name="option"
                 value="gold"
                 onChange={() => setOption("gold")}
-                onClick = {() => setTotalAmount("5000 LKR")}
+                onClick={() => setTotalAmount("5000 LKR")}
                 required
               />
               <label htmlFor="gold" style={{ color: "#FFD700" }}>
@@ -231,7 +233,7 @@ function Register(props) {
                 name="option"
                 value="platinum"
                 onChange={() => setOption("bronze")}
-                onClick = {() => setTotalAmount("7000 LKR")}
+                onClick={() => setTotalAmount("7000 LKR")}
                 required
               />
               <label htmlFor="platinum" style={{ color: "#88D3E1" }}>
@@ -264,9 +266,10 @@ function Register(props) {
             </div>
             <input
               type="file"
-              id="myFile"
-              name="filename"
+              id="file"
+              name="image"
               className="uploadButton"
+              onChange={(event) => setFile(event.target.files[0])}
               accept="image/*"
             ></input>
           </div>
