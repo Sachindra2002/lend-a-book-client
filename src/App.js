@@ -3,12 +3,16 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Fragment } from "react";
 import jwtDecode from "jwt-decode";
 
-import "./App.css";
+import "./App.scss";
+
 import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/signup";
 import MemberHome from "./pages/MemberHome/memberHome";
+import Dashboard from "./pages/Dashboard/Dashboard";
+
 import ScrollToTop from "./ScrollToTop";
+import Error404 from "./components/errors/Error404";
 
 /* REDUX */
 import { Provider } from "react-redux";
@@ -21,10 +25,9 @@ import AuthRoute from "./utils/authRoute";
 import AuthRouteAdmin from "./utils/authRouteAdmin";
 import AuthRouteAll from "./utils/authRouteAll";
 
-
 axios.defaults.baseURL = "http://localhost:5000";
 
-const token  = localStorage.LendABookToken;
+const token = localStorage.LendABookToken;
 
 //Check validity of JWT token
 if (token) {
@@ -51,6 +54,8 @@ function App() {
             <AuthRoute path="/sign-in" exact component={Login} />
             <AuthRoute path="/register" exact component={Register} />
             <AuthRouteAll path="/homepage" exact component={MemberHome} />
+            <AuthRouteAdmin path="/dashboard" exact component={Dashboard} />
+            <Route path="" exact component={Error404} />
           </Switch>
         </Router>
       </Provider>

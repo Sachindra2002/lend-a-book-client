@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Alert } from "react-bootstrap";
+import { Container, Alert, Badge } from "react-bootstrap";
 import AuthenticatedNavbar from "../../components/AuthenticatedNavbar/AuthenticatedNavbar";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -29,6 +29,9 @@ function MemberHome(props) {
           {`Hello ${props.firstName}! `}
           You are <b>not verified</b>.{" "}
         </Alert>
+        <Badge pill variant="primary">
+          Primary
+        </Badge>
       </div>
       <div id="greeting"></div> {props.firstName}
     </>

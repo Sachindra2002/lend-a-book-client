@@ -1,5 +1,5 @@
 import React from "react";
-import "../../App.css";
+import "../../App.scss";
 import Footer from "../../components/Footer/Footer";
 import HeroSection from "../../components/Hero Section/HeroSection";
 import MembershipCard from "../../components/MembershipCards/MembershipCard";

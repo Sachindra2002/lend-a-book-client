@@ -17,7 +17,7 @@ const authRoute = ({
       role === "admin" || (loading && authenticated) ? (
         <Component {...props} />
       ) : (
-        <Redirect to="/" />
+        <Redirect to="/access-denied" />
       )
     }
   />
@@ -26,7 +26,7 @@ const authRoute = ({
 const mapStateToProps = (state) => ({
   authenticated: state.user.authenticated,
   loading: state.user.loading,
-  role: state.user.role,
+  role: state.user.userRole,
 });
 
 authRoute.propTypes = {
