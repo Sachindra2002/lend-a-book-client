@@ -15,3 +15,5 @@ export const SET_DASHBOARD = "SET_DASHBOARD";
 export const SET_SELECTED_USER = "SET_SELECTED_USER";
 export const SET_USERS = "SET_USERS";
 export const LOADING_DATA = "LOADING_DATA";
+export const SET_BOOKS = "SET_BOOKS";
+export const SET_BOOK = "SET_BOOK";

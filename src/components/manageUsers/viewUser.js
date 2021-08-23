@@ -39,7 +39,7 @@ function ViewUser(props) {
   }, [user]);
 
   const handleSetVerified = () => {
-    props.setIsVerified(user.email);
+    props.setVerified(user.email);
     const _verified = isVerified;
     setIsVerified(!_verified);
   };
@@ -56,13 +56,13 @@ function ViewUser(props) {
         <p>Loading</p>
       ) : user ? (
         <>
-          <Modal className="view-user-card">
-            <Modal.Body>
+          <Card className="view-user-card">
+            <Card.Body>
               <Row>
                 <Col xs={3}>
                   <Card.Img
                     variant="top"
-                    src={image}
+                    src={`${user.image}`}
                     className="view-user-img"
                   />
                 </Col>
@@ -82,6 +82,15 @@ function ViewUser(props) {
                       Verified
                     </Badge>
                   )}
+                  {!isVerified && (
+                    <Badge
+                      pill
+                      variant="warning"
+                      className="view-user-pill-badge"
+                    >
+                      Not Verified
+                    </Badge>
+                  )}
                   {isBanned && (
                     <Badge
                       pill
@@ -97,26 +106,66 @@ function ViewUser(props) {
               <ListGroup>
                 <ListGroup.Item variant="light">
                   <Badge variant="secondary">Contact Number</Badge>
-                  <span>{user.phoneNumber}</span>
+                  <span>{"  "}{user.phoneNumber}</span>
                 </ListGroup.Item>
                 <ListGroup.Item variant="light">
-                  <Badge variant="secondary">Contact Number</Badge>
-                  <span>{user.dob}</span>
+                  <Badge variant="secondary">Date of Birth</Badge>
+                  <span>{"  "}{user.dob}</span>
+                </ListGroup.Item>
+                <ListGroup.Item variant="light">
+                  <Badge variant="secondary">Subscription</Badge>
+                  <span>{"  "}{user.Subscription.membershipOption}</span>
                 </ListGroup.Item>
               </ListGroup>
 
               <ButtonGroup vertical className="view-user-image-options">
-                  <Button
-                    variant="outline-info"
-                    onClick={() => setUserImageModalShow(true)}
-                  >
-                      {user.image
-                        ? "View User Image"
-                        : "User image not uploaded"}
-                  </Button>
+                <Button
+                  variant="outline-info"
+                  onClick={() => setUserImageModalShow(true)}
+                >
+                  {user.image ? "View User Image" : "User image not uploaded"}
+                </Button>
               </ButtonGroup>
-
-              
+              <ButtonGroup vertical className="view-user-image-options">
+                <Button
+                  variant={isVerified ? "outline-secondary" : "outline-info"}
+                  onClick={handleSetVerified}
+                >
+                  {isVerified ? "Remove Verify" : "Set Verified"}
+                </Button>
+                <Button
+                  variant={isBanned ? "outline-danger" : "outline-info"}
+                  onClick={handleSetBanned}
+                >
+                  {isBanned ? "Remove Ban" : "Set Ban"}
+                </Button>
+              </ButtonGroup>
+            </Card.Body>
+            <Card.Footer>
+              {" "}
+              <small className="text-muted">
+                {`Registered on ${dayjs(user.createdAt)
+                  .format("DD/MM/YYYY h:mm:ss A [GMT]", {
+                    timeZone: "Asia/Colombo",
+                  })
+                  .toString()}`}
+              </small>
+            </Card.Footer>
+          </Card>
+          <Modal
+            show={userImageModalShow}
+            onHide={() => setUserImageModalShow(false)}
+            size="lg"
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+          >
+            <Modal.Header closeButton></Modal.Header>
+            <Modal.Body className="view-user-modal-body">
+              <img
+                src={user.image}
+                alt=""
+                style={{ objectFit: "contain", width: "100%" }}
+              />
             </Modal.Body>
           </Modal>
         </>

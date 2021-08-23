@@ -32,18 +32,18 @@ input[type="radio"] {
   display: none;
 }
 
-label {
+label.radio-label {
   position: relative;
   cursor: pointer;
   font-weight: bold;
   padding-right: 32px;
 }
 
-label:nth-child(1) {
+label.radio-label:nth-child(1) {
   padding-right: 0;
 }
 
-label::before {
+label.radio-label::before {
   content: "";
   border: 2px solid black;
   display: inline-block;
@@ -54,7 +54,7 @@ label::before {
   border-radius: 50%;
 }
 
-label::after {
+label.radio-label::after {
   content: "";
   display: inline-block;
   position: absolute;

@@ -1,11 +1,12 @@
-import React from "react";
-import { Container, Alert, Badge } from "react-bootstrap";
+import React, {useState} from "react";
+import { Container, Alert, Badge, Modal, Button } from "react-bootstrap";
 import AuthenticatedNavbar from "../../components/AuthenticatedNavbar/AuthenticatedNavbar";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import "./memberHome.css";
 
 function MemberHome(props) {
+  const [show, setShow] = useState(false);
   var d = new Date();
   var time = d.getHours();
 
@@ -29,9 +30,23 @@ function MemberHome(props) {
           {`Hello ${props.firstName}! `}
           You are <b>not verified</b>.{" "}
         </Alert>
-        <Badge pill variant="primary">
-          Primary
-        </Badge>
+        <Button variant="primary" onClick={() => setShow(true)}>
+          Custom Width Modal
+        </Button>
+        <Modal
+          show={show}
+          size="lg"
+          onHide={() => setShow(false)}
+          dialogClassName="modal-90w"
+          aria-labelledby="example-custom-modal-styling-title"
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>Helooo</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <p>Test Modal</p>
+          </Modal.Body>
+        </Modal>
       </div>
       <div id="greeting"></div> {props.firstName}
     </>

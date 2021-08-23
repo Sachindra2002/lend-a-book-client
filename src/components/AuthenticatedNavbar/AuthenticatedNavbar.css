@@ -22,11 +22,18 @@
   color: #fff;
   justify-self: start;
   margin-left: 20px;
+  padding-bottom: 20px;
   cursor: pointer;
   text-decoration: none;
   font-size: 2.2rem;
   display: flex;
   align-items: center;
+  text-decoration: none;
+}
+
+.navbar-logo :hover {
+  border-bottom: none;
+  color: white;
 }
 
 .logout-button {

@@ -29,7 +29,7 @@ function ManageUsers(props) {
 
   useEffect(() => {
     props.getAllUsers();
-     // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -119,70 +119,72 @@ function ManageUsers(props) {
             <Col xs={5}>
               <InputGroup>
                 <InputGroup.Prepend>
-                    {/* <InputGroup.Text>
+                  <InputGroup.Text>
                         <i className="fas fa-search"></i>
-                    </InputGroup.Text> */}
+                    </InputGroup.Text>
                 </InputGroup.Prepend>
                 <FormControl
-                    placeholder="Search for a user"
-                    aria-label="Search for a user"
-                    aria-describedby="basic-addon2"
-                    onChange={(e) => search(e.target.value)}
+                  placeholder="Search for a user"
+                  aria-label="Search for a user"
+                  aria-describedby="basic-addon2"
+                  onChange={(e) => search(e.target.value)}
                 />
               </InputGroup>
             </Col>
             <Col xs={7}>
-                <Button
-                    className="search-user-button"
-                    variant="outline-primary"
-                    active={category === 0}
-                    onClick={setAllUsers}
-                >
-                    All Users
-                </Button>{" "}
-                <Button
-                    className="search-user-button"
-                    variant="outline-secondary"
-                    active={category === 1}
-                    onClick={setNonVerified}
-                >
-                    Non-verified
-                </Button>{" "}
-                <Button
-                    className="search-user-button"
-                    variant="outline-danger"
-                    active={category === 2}
-                    onClick={setBanned}
-                >
-                    Banned
-                </Button>{" "}
+              <Button
+                className="search-user-button"
+                variant="outline-primary"
+                active={category === 0}
+                onClick={setAllUsers}
+              >
+                All Users
+              </Button>{" "}
+              <Button
+                className="search-user-button"
+                variant="outline-secondary"
+                active={category === 1}
+                onClick={setNonVerified}
+              >
+                Non-verified
+              </Button>{" "}
+              <Button
+                className="search-user-button"
+                variant="outline-danger"
+                active={category === 2}
+                onClick={setBanned}
+              >
+                Banned
+              </Button>{" "}
             </Col>
           </Row>
         </Card.Body>
       </Card>
       {_users.length > 0 ? (
-          chunkedUsersMarkup.map((chunk, index) => (
-              <CardColumns key={index}>{chunk}</CardColumns>
-          ))
+        chunkedUsersMarkup.map((chunk, index) => (
+          <CardColumns key={index}>{chunk}</CardColumns>
+        ))
       ) : loading ? (
-          <p>Loading...</p>
+        <p>Loading...</p>
       ) : (
-          <Alert variant="warning" className="alert">No users found</Alert>
+        <Alert variant="warning" className="alert">
+          No users found
+        </Alert>
       )}
     </div>
   );
 }
 
 ManageUsers.propTypes = {
-    getAllUsers: PropTypes.func.isRequired,
-}
+  getAllUsers: PropTypes.func.isRequired,
+};
 
 const mapStateToProps = (state) => ({
-    data: state.data,
+  data: state.data,
 });
 
 const mapActionsToProps = {
-    getAllUsers,
-}
+  getAllUsers,
+};
 
 export default connect(mapStateToProps, mapActionsToProps)(ManageUsers);

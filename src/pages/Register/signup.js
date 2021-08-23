@@ -200,7 +200,7 @@ function Register(props) {
                 required
                 defaultChecked
               />
-              <label htmlFor="bronze" style={{ color: "#cd7f32" }}>
+              <label className="radio-label" htmlFor="bronze" style={{ color: "#cd7f32" }}>
                 Bronze
               </label>
               <input
@@ -212,7 +212,7 @@ function Register(props) {
                 onClick={() => setTotalAmount("4000 LKR")}
                 required
               />
-              <label htmlFor="silver" style={{ color: "#C0C0C0" }}>
+              <label className="radio-label" htmlFor="silver" style={{ color: "#C0C0C0" }}>
                 Silver
               </label>
               <input
@@ -224,7 +224,7 @@ function Register(props) {
                 onClick={() => setTotalAmount("5000 LKR")}
                 required
               />
-              <label htmlFor="gold" style={{ color: "#FFD700" }}>
+              <label className="radio-label" htmlFor="gold" style={{ color: "#FFD700" }}>
                 Gold
               </label>
               <input
@@ -236,7 +236,7 @@ function Register(props) {
                 onClick={() => setTotalAmount("7000 LKR")}
                 required
               />
-              <label htmlFor="platinum" style={{ color: "#88D3E1" }}>
+              <label className="radio-label" htmlFor="platinum" style={{ color: "#88D3E1" }}>
                 Platinum
               </label>
             </div>

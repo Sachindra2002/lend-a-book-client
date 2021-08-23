@@ -7,9 +7,10 @@ h1 {
   text-align: center;
 }
 
-h3{
+h3 {
   margin-top: 5px;
   margin-bottom: 5px;
+  font-size:15px;
 }
 
 .cards__container {
@@ -62,8 +63,8 @@ h3{
   animation-duration: 2s;
 } */
 
-.membership-type-button-design{
-  background-color: #5B75F0;
+.membership-type-button-design {
+  background-color: #5b75f0;
   font-size: 20px;
   color: white;
   margin-top: 40px;
@@ -74,7 +75,7 @@ h3{
   border-radius: 10px;
 }
 
-.membership-type-button{
+.membership-type-button {
   align-items: center;
   display: flex;
   margin: 5px 50px;
@@ -118,16 +119,16 @@ h3{
   width: 350px;
 }
 
-.cards__item__text{
+.cards__item__text {
   color: attr(text-colours);
   font-size: 40px;
   line-height: 24px;
   text-align: center;
 }
 
-.cards__items__features{
-    color: grey;
-    margin-top: 20px;
+.cards__items__features {
+  color: grey;
+  margin-top: 20px;
 }
 
 @media only screen and (min-width: 1200px) {
