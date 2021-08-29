@@ -11,94 +11,95 @@ import {
 import PropTypes from "prop-types";
 
 //Import Components
-import BookCard from "./bookCard";
-import AddBookModal from "./addBookModal";
+import MovieCard from "./movieCard";
+import AddMovieModal from "./addMovieModal";
 
 //REDUX
 import { connect } from "react-redux";
-import { getAllBooks } from "../../redux/actions/dataActions";
+import { getAllMovies } from "../../redux/actions/dataActions";
 
 //SCSS
-import "./manageBooks.scss";
+import "./manageMovies.scss";
 
-//Import consts
-import { BOOK_TYPES } from "../../utils/consts";
+//Import Consts
+import { MOVIE_TYPES } from "../../utils/consts";
 
-function ManageBooks(props) {
-  const [_books, setBooks] = useState([]);
-  const [bookPool, setBookPool] = useState([]);
+function ManageMovies(props) {
+  const [_movies, setmovies] = useState([]);
+  const [moviePool, setMoviePool] = useState([]);
   const [addModalShow, setAddModalShow] = useState(false);
-  const [genre, setGenre] = useState("Book Genre");
+  const [genre, setGenre] = useState("Movie Genre");
   const [available, setAvailability] = useState("Availability");
 
   const {
-    data: { books, loading },
+    data: { movies, loading },
   } = props;
 
-  //When component is initiated, get all books from the backend
+  //When component is initiated, get all movies from the backend
   useEffect(() => {
-    props.getAllBooks();
+    props.getAllMovies();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  //When book list is passed from props are updated, update state variables
+  //When movie list is passed from props are updated, update state variables
   useEffect(() => {
-    if (books) {
-      setBooks(books);
-      setBookPool(books);
+    if (movies) {
+      setmovies(movies);
+      setMoviePool(movies);
     }
-  }, [books]);
+  }, [movies]);
 
-  //Function to create a list of book cards from book list in state
-  let booksMarkup = _books.map((book) => (
-    <BookCard key={book.isbn} book={book} />
+  //Function to create a list of movie cards from movie list in state
+  let moviesMarkup = _movies.map((movie) => (
+    <MovieCard key={movie.id} movie={movie} />
   ));
 
-  //Function to change displayed books when category is set
+  //Function to change displayes movies when genre is set
   const setValue = (type, name, value) => {
     handleReset();
 
-    //Depending on category update state
+    //Depending on genre update state
     if (type === "genre") setGenre(name);
     else if (type === "isAvailable") setAvailability(name);
 
-    //Filter Book List
-    const booksCopy = books.map((book) => book);
-    const result = booksCopy.filter((item) => {
+    //Filter Movie list
+    const moviesCopy = movies.map((movie) => movie);
+    const result = moviesCopy.filter((item) => {
       return item[type] === value;
     });
 
-    //Set as state to re-render book cards
-    setBooks(result);
-    setBookPool(result);
+    //Set as state to re-render movie cards
+    setmovies(result);
+    setMoviePool(result);
   };
 
-  //Function to search books
+  //Function to search movies
   const search = (input) => {
     //Get a copy of state
-    const bookCopy = bookPool.map((book) => book);
+    const movieCopy = moviePool.map((movie) => movie);
 
     //Array of search string after splitting by spaces
     const inputs = input.toLowerCase().split(" ");
 
-    //Book title, author, book name and isbn will be searched through
-    const searchKeys = ["bookTitle", "authorName", "bookName", "isbn"];
-    let booksArray = [];
+    //Movie title, director will be serached through
+    const searchKeys = ["movieName", "director"];
+    let moviesArray = [];
 
-    //If search criteria is null reset books to display all books
+    //If search criteria is null reset movies to display all movies
     if (inputs.length === 1 && inputs[0] === "") {
-      booksArray = bookCopy;
+      moviesArray = movieCopy;
     }
-    //If serach criteria is entered
+
+    //if search criteria is entered
     else {
-      //Filter through book list to find matches
+      //Filter through movie liest to find matches
       inputs.forEach((word) => {
-        bookCopy.filter((item) => {
+        movieCopy.filter((item) => {
           // eslint-disable-next-line array-callback-return
           return Object.keys(item).some((key) => {
             if (searchKeys.includes(key)) {
               if (word.length > 0 && item[key].toLowerCase().includes(word))
-                if (item) booksArray.push(item);
+                if (item) moviesArray.push(item);
             }
           });
         });
@@ -106,8 +107,8 @@ function ManageBooks(props) {
     }
 
     //Remove duplicates and set state to be displayed
-    const result = [...new Set(booksArray)];
-    setBooks(result);
+    const result = [...new Set(moviesArray)];
+    setmovies(result);
   };
 
   const handleReset = () => {
@@ -116,12 +117,12 @@ function ManageBooks(props) {
     setAvailability("Availability");
 
     //Reset State
-    setBooks(books);
-    setBookPool(books);
+    setmovies(movies);
+    setMoviePool(movies);
   };
 
-  //Drop down for select genre of book
-  const genreDropdownmarkup = BOOK_TYPES.map((type, index) => (
+  //Drop down for select genre of movie
+  const genreDropdownmarkup = MOVIE_TYPES.map((type, index) => (
     <Dropdown.Item
       key={index}
       onSelect={() => setValue("type", type.name, type.id)}
@@ -134,7 +135,7 @@ function ManageBooks(props) {
     <div>
       <Card className="search-box-users">
         <Card.Body>
-          <Card.Title>Search Books</Card.Title>
+          <Card.Title>Search Movies</Card.Title>
           <Row>
             <Col xs={5}>
               <InputGroup>
@@ -144,9 +145,9 @@ function ManageBooks(props) {
                   </InputGroup.Text>
                 </InputGroup.Prepend>
                 <FormControl
-                  placeholder="Search for books"
-                  aria-label="Search for books"
-                  aria-describedby="basic-addon2"
+                  placeholder="Search for movies"
+                  aria-label="Search for movies"
+                  aria-describedby="basic=addon2"
                   onChange={(e) => search(e.target.value)}
                 />
               </InputGroup>
@@ -188,20 +189,20 @@ function ManageBooks(props) {
                     </Dropdown.Menu>
                   </Dropdown>
                 </Col>
-              </Row>
-              <Row>
-                <Col xs={5}>
-                  <Button
-                    variant="outline-secondary"
-                    className="reset-button"
-                    onClick={handleReset}
-                  >
-                    <span>
-                      <i className="fas fa-times reset-icon"></i>
-                    </span>
-                    Reset
-                  </Button>
-                </Col>
+                <Row>
+                  <Col xs={5}>
+                    <Button
+                      variant="outline-secondary"
+                      className="search-user-button"
+                      onClick={handleReset}
+                    >
+                      <span>
+                        <i className="fas fa-times reset-icon"></i>
+                      </span>
+                      Reset
+                    </Button>
+                  </Col>
+                </Row>
               </Row>
             </Col>
           </Row>
@@ -210,7 +211,10 @@ function ManageBooks(props) {
       <Row>
         <Col lg={4}>
           <Card className="book-card">
-            <Card.Img variant="info" src="http://localhost:5000/books/addBook.jpg" />
+            <Card.Img
+              variant="info"
+              src="http://localhost:5000/movies/addMovie.jpg"
+            />
             <Card.Body>
               <Button
                 variant="info"
@@ -219,7 +223,7 @@ function ManageBooks(props) {
               >
                 <span>
                   <i className="fas fa-plus-square fa-plus-square-add"></i>
-                  Add Book
+                  Add Movie
                 </span>
               </Button>
             </Card.Body>
@@ -228,7 +232,7 @@ function ManageBooks(props) {
         {loading ? (
           <p>Loading...</p>
         ) : (
-          booksMarkup.map((card, index) => (
+          moviesMarkup.map((card, index) => (
             <Col lg={4} md={4} sm={4} key={index}>
               {" "}
               {card}{" "}
@@ -236,13 +240,13 @@ function ManageBooks(props) {
           ))
         )}
       </Row>
-      <AddBookModal show={addModalShow} onHide={() => setAddModalShow(false)} />
+      <AddMovieModal show={addModalShow} onHide={() => setAddModalShow(false)} />
     </div>
   );
 }
 
-ManageBooks.propTypes = {
-  getAllBooks: PropTypes.func.isRequired,
+ManageMovies.propTypes = {
+  getAllMovies: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -250,7 +254,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapActionsToProps = {
-  getAllBooks,
+  getAllMovies,
 };
 
-export default connect(mapStateToProps, mapActionsToProps)(ManageBooks);
+export default connect(mapStateToProps, mapActionsToProps)(ManageMovies);

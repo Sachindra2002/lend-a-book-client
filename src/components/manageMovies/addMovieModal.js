@@ -5,32 +5,30 @@ import PropTypes from "prop-types";
 
 //REDUX
 import { connect } from "react-redux";
-import { addBook } from "../../redux/actions/dataActions";
+import { addMovie } from "../../redux/actions/dataActions";
 import { clearErrors } from "../../redux/actions/uiActions";
 
 //Import consts
-import { BOOK_TYPES, AGE } from "../../utils/consts";
+import { MOVIE_TYPES, AGE } from "../../utils/consts";
 
-function AddBookModal(props) {
-  const [isbn, setIsbn] = useState("");
-  const [bookName, setBookName] = useState("");
+function AddMovieModal(props) {
+  const [movieTitle, setMovieTitle] = useState("");
   const [quantity, setQuantity] = useState("");
-  const [title, setTitle] = useState("");
-  const [authorName, setAuthorName] = useState("");
-  const [publisher, setPublisher] = useState("");
+  const [imdb, setImdb] = useState("");
+  const [director, setDirector] = useState("");
   const [year, setYear] = useState("");
   const [genre, setGenre] = useState("");
   const [is18, setIs18] = useState("");
   const [summary, setSummary] = useState("");
   const [imageFile, setImageFile] = useState();
-  const [bookFile, setBookFile] = useState();
+  const [movieFile, setMovieFile] = useState();
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
     bsCustomFileInput.init();
   }, []);
 
-  //When errors are updated the component is re-rendered to diaply errors
+  //When errors are updated the component is re-rendered to display errors
   useEffect(() => {
     props.UI.errors ? setErrors(props.UI.errors.error) : setErrors({});
   }, [props.UI.errors]);
@@ -39,26 +37,25 @@ function AddBookModal(props) {
     UI: { loading },
   } = props;
 
-  const handleAddBook = async (event) => {
+  const handleAddMovie = async (event) => {
     event.preventDefault();
 
     const data = new FormData();
-    data.append("isbn", isbn);
-    data.append("bookName", bookName);
-    data.append("title", title);
-    data.append("authorName", authorName);
-    data.append("publisher", publisher);
+    data.append("movieTitle", movieTitle);
+    data.append("quantity", quantity);
+    data.append("director", director);
+    data.append("imdb", imdb);
     data.append("year", year);
     data.append("genre", genre);
     data.append("is18", is18);
     data.append("summary", summary);
     data.append("imageFile", imageFile);
-    data.append("bookFile", bookFile);
+    data.append("movieFile", movieFile);
 
-    //Add Book to the backend
-    let result = await props.addBook(data);
+    //Add Movie to the backend
+    let result = await props.addMovie(data);
 
-    //If no errors are found clear the modal and hide it
+    //f no erros are found clear the modal and hide it
     if (result === true) {
       props.onHide();
       clearFields();
@@ -67,22 +64,20 @@ function AddBookModal(props) {
 
   //Method to clear all form fields and set them to default
   const clearFields = () => {
-    setIsbn("");
-    setBookName("");
-    setTitle("");
-    setAuthorName("");
-    setPublisher("");
+    setMovieTitle("");
+    setQuantity("");
+    setDirector("");
     setYear("");
     setIs18("");
     setSummary("");
-    setGenre(BOOK_TYPES[0].id);
+    setGenre(MOVIE_TYPES[0].id);
     props.clearErrors();
   };
 
   const newProps = { ...props };
 
-  //Dropdown select for book genre
-  const genreDropdownMarkup = BOOK_TYPES.map((type, index) => (
+  //Dropdown select for movie genre
+  const genreDropdownMarkup = MOVIE_TYPES.map((type, index) => (
     <option key={index} value={type.id}>
       {type.name}
     </option>
@@ -97,7 +92,7 @@ function AddBookModal(props) {
 
   //Remove unwanted props before passing props to modal
   delete newProps.UI;
-  delete newProps.addBook;
+  delete newProps.addMovie;
   delete newProps.clearErrors;
 
   return (
@@ -109,64 +104,34 @@ function AddBookModal(props) {
       // onExit={clearFields}
     >
       <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">Add Book</Modal.Title>
+        <Modal.Title id="contained-modal-title-vcenter">Add Movie</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form onSubmit={handleAddBook}>
+        <Form onSubmit={handleAddMovie}>
           <Form.Row>
             <Form.Group as={Col}>
-              <Form.Label>ISBN</Form.Label>
+              <Form.Label>Movie Title</Form.Label>
               <Form.Control
                 type="text"
-                value={isbn}
-                className={errors.isbn ? "is-invalid" : null}
-                onChange={(e) => setIsbn(e.target.value)}
+                value={movieTitle}
+                onChange={(e) => setMovieTitle(e.target.value)}
                 required
               />
-              <p className="error-text" hidden={!errors.isbn}>
-                {errors.isbn}
+              <p className="error-text" hidden={!errors.movieTitle}>
+                {errors.movieTitle}
               </p>
             </Form.Group>
             <Form.Group as={Col}>
-              <Form.Label>Author Name</Form.Label>
+              <Form.Label>Movie Director</Form.Label>
               <Form.Control
                 type="text"
-                value={authorName}
-                onChange={(e) => setAuthorName(e.target.value)}
+                value={director}
+                onChange={(e) => setDirector(e.target.value)}
                 required
               />
             </Form.Group>
           </Form.Row>
           <Form.Row>
-            <Form.Group as={Col}>
-              <Form.Label>Name of Book</Form.Label>
-              <Form.Control
-                type="text"
-                value={bookName}
-                onChange={(e) => setBookName(e.target.value)}
-                required
-              />
-            </Form.Group>
-            <Form.Group as={Col}>
-              <Form.Label>Title of Book</Form.Label>
-              <Form.Control
-                type="text"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                required
-              />
-            </Form.Group>
-          </Form.Row>
-          <Form.Row>
-            <Form.Group as={Col}>
-              <Form.Label>Name of Publisher</Form.Label>
-              <Form.Control
-                type="text"
-                value={publisher}
-                onChange={(e) => setPublisher(e.target.value)}
-                required
-              />
-            </Form.Group>
             <Form.Group as={Col}>
               <Form.Label>Year of Release</Form.Label>
               <Form.Control
@@ -176,7 +141,18 @@ function AddBookModal(props) {
                 required
               />
             </Form.Group>
+
+            <Form.Group as={Col}>
+              <Form.Label>IMDB Rating</Form.Label>
+              <Form.Control
+                type="text"
+                value={imdb}
+                onChange={(e) => setImdb(e.target.value)}
+                required
+              />
+            </Form.Group>
           </Form.Row>
+
           <Form.Row>
             <Form.Group as={Col}>
               <Form.Label>Genre</Form.Label>
@@ -199,7 +175,7 @@ function AddBookModal(props) {
               </Form.Control>
             </Form.Group>
             <Form.Group as={Col}>
-              <Form.Label>Quantity available</Form.Label>
+              <Form.Label>Quantity </Form.Label>
               <Form.Control
                 type="text"
                 value={quantity}
@@ -210,7 +186,7 @@ function AddBookModal(props) {
           </Form.Row>
           <Form.Row>
             <Form.Group as={Col} controlId="exampleForm.ControlTextarea1">
-              <Form.Label>Enter Summary of the Book</Form.Label>
+              <Form.Label>Enter Summary of the Movie</Form.Label>
               <Form.Control
                 as="textarea"
                 rows={3}
@@ -221,7 +197,7 @@ function AddBookModal(props) {
           </Form.Row>
           <Form.Row>
             <Form.Group as={Col}>
-              <Form.Label>Upload Cover Image of Book</Form.Label>
+              <Form.Label>Upload Cover Image of Movie</Form.Label>
               <Form.File
                 id="custom-file"
                 label="Upload Cover Image"
@@ -231,12 +207,12 @@ function AddBookModal(props) {
               />
             </Form.Group>
             <Form.Group as={Col}>
-              <Form.Label>Upload PDF file of Book </Form.Label>
+              <Form.Label>Upload mp4 file of Movie </Form.Label>
               <Form.File
                 id="custom-file"
-                label="Upload PDF File"
-                accept="application/pdf"
-                onChange={(event) => setBookFile(event.target.files[0])}
+                label="Upload mp4 File"
+                accept="video/mp4,video/x-m4v,video/*"
+                onChange={(event) => setMovieFile(event.target.files[0])}
                 custom
               />
             </Form.Group>
@@ -244,7 +220,7 @@ function AddBookModal(props) {
           <Button type="submit" style={{ marginTop: 20 }} disabled={loading}>
             <span>
               <i className="fas fa-plus-square fa-plus-square-add"></i>
-              {loading ? "Adding Book..." : "Add Book"}
+              {loading ? "Adding Movie..." : "Add Movie"}
             </span>
           </Button>
         </Form>
@@ -253,8 +229,8 @@ function AddBookModal(props) {
   );
 }
 
-AddBookModal.propTypes = {
-  addBook: PropTypes.func.isRequired,
+AddMovieModal.propTypes = {
+  addMovie: PropTypes.func.isRequired,
   clearErrors: PropTypes.func.isRequired,
   UI: PropTypes.object.isRequired,
 };
@@ -264,8 +240,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapActionsToProps = {
-  addBook,
+  addMovie,
   clearErrors,
 };
 
-export default connect(mapStateToProps, mapActionsToProps)(AddBookModal);
+export default connect(mapStateToProps, mapActionsToProps)(AddMovieModal);

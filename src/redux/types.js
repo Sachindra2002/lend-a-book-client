@@ -17,3 +17,5 @@ export const SET_USERS = "SET_USERS";
 export const LOADING_DATA = "LOADING_DATA";
 export const SET_BOOKS = "SET_BOOKS";
 export const SET_BOOK = "SET_BOOK";
+export const SET_MOVIES = "SET_MOVIES";
+export const SET_MOVIE = "SET_MOVIE";

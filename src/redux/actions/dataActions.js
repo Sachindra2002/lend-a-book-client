@@ -8,6 +8,8 @@ import {
   LOADING_UI,
   SET_BOOKS,
   SET_BOOK,
+  SET_MOVIES,
+  SET_MOVIE,
   CLEAR_ERRORS,
   SET_ERRORS,
 } from "../types";
@@ -92,6 +94,7 @@ export const getBook = (id) => async (dispatch) => {
   }
 };
 
+/* Add an book to the system */
 export const addBook = (book) => async (dispatch) => {
   dispatch({ type: LOADING_UI });
 
@@ -107,5 +110,95 @@ export const addBook = (book) => async (dispatch) => {
       type: SET_ERRORS,
       payload: error.response.data,
     });
+  }
+};
+
+/*Toggle availability of book */
+export const toggleBookAvailability = (id) => async (dispatch) => {
+  try {
+    await axios.get(`/book-availability/${id}`);
+    dispatch(getAllBooks());
+    dispatch(getBook(id));
+    dispatch({ type: CLEAR_ERRORS });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+/*! Remove Book ! */
+export const removeBook = (id) => async (dispatch) => {
+  dispatch({ type: LOADING_UI });
+  try {
+    let results = await axios.delete(`/book/${id}`);
+    dispatch(getAllBooks());
+    dispatch({ type: SET_BOOK, payload: null });
+    dispatch({ type: CLEAR_ERRORS });
+
+    //Prevent modal from closing after errors are displayed
+    if (results.data.message === "Successfully deleted") return true;
+  } catch (error) {
+    dispatch({
+      type: SET_ERRORS,
+      payload: error.response.data,
+    });
+  }
+};
+
+/* Get all Movies in the database */
+export const getAllMovies = () => async (dispatch) => {
+  dispatch({ type: LOADING_DATA });
+  try {
+    let results = await axios.get("/movies");
+    dispatch({
+      type: SET_MOVIES,
+      payload: results.data.movies,
+    });
+  } catch (error) {
+    dispatch({ type: SET_MOVIES, payload: [] });
+    console.log(error);
+  }
+};
+
+/* Get single Movie info */
+export const getMovie = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: LOADING_UI });
+    let result = await axios.get(`/movie/${id}`);
+    dispatch({ type: SET_MOVIE, payload: result.data });
+    dispatch({ type: STOP_LOADING_UI });
+  } catch (error) {
+    dispatch({ type: SET_MOVIE, payload: {} });
+    console.log(error);
+  }
+};
+
+/* Add an movie to the system */
+export const addMovie = (movie) => async (dispatch) => {
+  dispatch({ type: LOADING_UI });
+
+  try {
+    let results = await axios.post("/movie", movie);
+    await dispatch(getAllMovies());
+    dispatch({ type: CLEAR_ERRORS });
+
+    //Prevent modal from closing after errors are displayed
+    if (results.data.id) return true;
+  } catch (error) {
+    dispatch({
+      type: SET_ERRORS,
+      payload: error.response.data,
+    });
+  }
+};
+
+/*Toggle availability of book */
+export const toggleMovieAvailability = (id) => async (dispatch) => {
+  try {
+    await axios.get(`/movie-availability/${id}`);
+    dispatch(getAllMovies());
+    dispatch(getMovie(id));
+    dispatch({ type: CLEAR_ERRORS });
+  } catch (error) {
+    console.log(error);
   }
 };

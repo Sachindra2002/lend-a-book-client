@@ -12,10 +12,11 @@ import ViewUser from "../../components/manageUsers/viewUser";
 import ManageBooks from "../../components/manageBooks/manageBooks";
 import ViewBook from "../../components/manageBooks/viewBook";
 
+import ManageMovies from "../../components/manageMovies/manageMovies";
+import ViewMovie from "../../components/manageMovies/viewMovie";
 
 //Redux
 import { connect } from "react-redux";
-
 
 const Dashboard = (props) => {
   const {
@@ -30,19 +31,27 @@ const Dashboard = (props) => {
           <Col xs={2} id="sidebar-wrapper">
             <DashboardNavbar />
           </Col>
-          {dashboard === 2 ? (
-            <Col xs={10} id="page-content-wrapper">
-            </Col>
-          ) : dashboard === 3 ? (
-            <Col xs={10} id="page-content-wrapper">
-            </Col>
+          {dashboard === 3 ? (
+            <Col xs={10} id="page-content-wrapper"></Col>
           ) : (
             <>
               <Col xs={7} id="page-content-wrapper">
-                {dashboard === 0 ? <ManageUsers/> : <ManageBooks/>}
+                {dashboard === 0 ? (
+                  <ManageUsers />
+                ) : dashboard === 1 ? (
+                  <ManageBooks />
+                ) : (
+                  <ManageMovies/>
+                )}
               </Col>
               <Col xs={3} id="page-content-wrapper">
-                {dashboard === 0 ? <ViewUser/> : <ViewBook/>}
+                {dashboard === 0 ? (
+                  <ViewUser />
+                ) : dashboard === 1 ? (
+                  <ViewBook />
+                ) : (
+                  <ViewMovie/>
+                )}
               </Col>
             </>
           )}

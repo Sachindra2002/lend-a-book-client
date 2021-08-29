@@ -1,4 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
+import { Modal } from "react-bootstrap";
 import { Document, Page } from "react-pdf/dist/esm/entry.webpack";
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 import { pdfjs } from "react-pdf";
@@ -16,10 +17,11 @@ import PropTypes from "prop-types";
 import dayjs from "dayjs";
 
 import "./viewBook.scss";
+import RemoveBookModal from "./removeBookModal";
 
 //REDUX
 import { connect } from "react-redux";
-import { Modal } from "react-bootstrap";
+import { toggleBookAvailability } from "../../redux/actions/dataActions";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
@@ -39,6 +41,7 @@ function ViewBook(props) {
   const [bookFileModalShow, setBookFileModalShow] = useState(false);
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
+  const [removeModalShow, setRemoveModalShow] = useState(false);
 
   function onDocumentLoadSuccess({ numPages }) {
     setNumPages(numPages);
@@ -64,7 +67,7 @@ function ViewBook(props) {
 
   //Handle toggle activate
   const handleAvailabilityToggle = () => {
-    props.toggleVehicleAvailability(book.isbn);
+    props.toggleBookAvailability(book.isbn);
   };
 
   return loading ? (
@@ -128,7 +131,7 @@ function ViewBook(props) {
             <Button
               variant="outline-danger"
               disabled={!book.isAvailable}
-              //   onClick={() => setRemoveModalShow(true)}
+              onClick={() => setRemoveModalShow(true)}
             >
               Remove Book
             </Button>
@@ -187,6 +190,12 @@ function ViewBook(props) {
           </div>
         </Modal.Body>
       </Modal>
+
+      <RemoveBookModal
+        id={book.isbn}
+        show={removeModalShow}
+        onHide={() => setRemoveModalShow(false)}
+      />
     </Fragment>
   ) : (
     <Alert variant="warning">No Book Selected</Alert>
@@ -196,6 +205,7 @@ function ViewBook(props) {
 ViewBook.propType = {
   book: PropTypes.object,
   UI: PropTypes.object.isRequired,
+  toggleBookAvailability: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -203,6 +213,8 @@ const mapStateToProps = (state) => ({
   UI: state.UI,
 });
 
-const mapActionsToProps = {};
+const mapActionsToProps = {
+  toggleBookAvailability,
+};
 
 export default connect(mapStateToProps, mapActionsToProps)(ViewBook);
