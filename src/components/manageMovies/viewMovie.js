@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
-import ReactPlayer from 'react-player';
+import ReactPlayer from "react-player";
 
 import {
   Card,
@@ -15,6 +15,7 @@ import PropTypes from "prop-types";
 import dayjs from "dayjs";
 
 import "./viewMovie.scss";
+import RemoveMovieModal from "./removeMovieModal";
 
 //REDUX
 import { connect } from "react-redux";
@@ -29,6 +30,7 @@ function ViewMovie(props) {
 
   const [errors, setErrors] = useState({});
   const [movieFileModalShow, setMovieFileModalShow] = useState(false);
+  const [removeModalShow, setRemoveModalShow] = useState(false);
 
   //Update state with errors
   useEffect(() => {
@@ -102,7 +104,7 @@ function ViewMovie(props) {
             <Button
               variant="outline-danger"
               disabled={!movie.isAvailable}
-              // onClick={() => setRemoveModalShow(true)}
+              onClick={() => setRemoveModalShow(true)}
             >
               Remove Movie
             </Button>
@@ -129,10 +131,19 @@ function ViewMovie(props) {
         <Modal.Header closeButton>{movie.movieName}</Modal.Header>
         <Modal.Body>
           <div>
-              <ReactPlayer controls url={movie.movieFile} style={{height: 100}}/>
+            <ReactPlayer
+              controls
+              url={movie.movieFile}
+              style={{ height: 100 }}
+            />
           </div>
         </Modal.Body>
       </Modal>
+      <RemoveMovieModal
+        id={movie.id}
+        show={removeModalShow}
+        onHide={() => setRemoveModalShow(false)}
+      />
     </Fragment>
   ) : (
     <Alert variant="warning">No Movie Selected</Alert>

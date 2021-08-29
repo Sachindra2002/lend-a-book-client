@@ -35,7 +35,7 @@ function MovieCard(props) {
       <Badge
         pill
         className="book-card-badge"
-        variant={isAvailable ? "success" : "Unavailable"}
+        variant={isAvailable ? "success" : "danger"}
       >
         {isAvailable ? "Available" : "Unavailable"}
       </Badge>

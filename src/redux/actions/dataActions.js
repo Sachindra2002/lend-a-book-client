@@ -202,3 +202,22 @@ export const toggleMovieAvailability = (id) => async (dispatch) => {
     console.log(error);
   }
 };
+
+/*! Remove Movie ! */
+export const removeMovie = (id) => async (dispatch) => {
+  dispatch({ type: LOADING_UI });
+  try {
+    let results = await axios.delete(`/movie/${id}`);
+    dispatch(getAllMovies());
+    dispatch({ type: SET_MOVIE, payload: null });
+    dispatch({ type: CLEAR_ERRORS });
+
+    //Prevent modal from closing after errors are displayed
+    if (results.data.message === "Successfully deleted") return true;
+  } catch (error) {
+    dispatch({
+      type: SET_ERRORS,
+      payload: error.response.data,
+    });
+  }
+};

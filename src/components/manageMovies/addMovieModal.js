@@ -117,8 +117,8 @@ function AddMovieModal(props) {
                 onChange={(e) => setMovieTitle(e.target.value)}
                 required
               />
-              <p className="error-text" hidden={!errors.movieTitle}>
-                {errors.movieTitle}
+              <p className="error-text" hidden={!errors.movieName}>
+                {errors.movieName}
               </p>
             </Form.Group>
             <Form.Group as={Col}>
