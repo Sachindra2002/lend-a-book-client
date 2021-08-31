@@ -1,21 +1,33 @@
-import React, {useState} from "react";
-import { Container, Alert, Badge, Modal, Button } from "react-bootstrap";
+import React, { useState } from "react";
+import {
+  Container,
+  Alert,
+  Badge,
+  Modal,
+  Button,
+  Row,
+  Col,
+} from "react-bootstrap";
 import AuthenticatedNavbar from "../../components/AuthenticatedNavbar/AuthenticatedNavbar";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import "./memberHome.css";
 
+import ManageHomepageBooks from "../../components/viewBooksHomeScreen/manageHomepageBooks";
+import ManageHomepageMovies from "../../components/viewMoviesHomeScreen/manageHomepageMovies";
+
 function MemberHome(props) {
   const [show, setShow] = useState(false);
   var d = new Date();
   var time = d.getHours();
+  var greeting = "";
 
   if (time < 12) {
-    //document.getElementById('greeting').innerText = "Good Morning";
-  } else if (time > 12) {
-    //document.getElementById('greeting').innerText = "Good Afternoon";
+    greeting = "Good Morning";
+  } else if (time > 12 < 15) {
+    greeting = "Good Afternoon";
   } else if (time > 15) {
-    //document.getElementById('greeting').innerText = "Good Evening";
+    greeting = "Good Evening";
   }
 
   return (
@@ -27,34 +39,32 @@ function MemberHome(props) {
           className="not-verified-message"
           hidden={props.isVerified}
         >
-          {`Hello ${props.firstName}! `}
-          You are <b>not verified</b>.{" "}
+          {`Hello ${props.firstName} ${props.lastName}! `}
+          You are <b>not verified,</b> You will not be able to do any
+          reservations until human verification is passed.{" "}
         </Alert>
-        <Button variant="primary" onClick={() => setShow(true)}>
-          Custom Width Modal
-        </Button>
-        <Modal
-          show={show}
-          size="lg"
-          onHide={() => setShow(false)}
-          dialogClassName="modal-90w"
-          aria-labelledby="example-custom-modal-styling-title"
-        >
-          <Modal.Header closeButton>
-            <Modal.Title>Helooo</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <p>Test Modal</p>
-          </Modal.Body>
-        </Modal>
       </div>
-      <div id="greeting"></div> {props.firstName}
+      <div className="greeting">{greeting}</div>{" "}
+      <div className="greeting-name">
+        {props.firstName} {props.lastName}
+      </div>
+      <Container fluid>
+        <>
+          <Col id="page-content-wrapper">
+            <ManageHomepageBooks />
+          </Col>
+          <Col id="page-content-wrapper">
+            <ManageHomepageMovies />
+          </Col>
+        </>
+      </Container>
     </>
   );
 }
 
 const mapStateToProps = (state) => ({
   firstName: state.user.firstName,
+  lastName: state.user.lastName,
   isVerified: state.user.isVerified,
 });
 

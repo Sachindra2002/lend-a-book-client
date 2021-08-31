@@ -32,7 +32,9 @@ const Dashboard = (props) => {
             <DashboardNavbar />
           </Col>
           {dashboard === 3 ? (
-            <Col xs={10} id="page-content-wrapper"></Col>
+            <Col xs={10} id="page-content-wrapper">
+              Reservations
+            </Col>
           ) : (
             <>
               <Col xs={7} id="page-content-wrapper">

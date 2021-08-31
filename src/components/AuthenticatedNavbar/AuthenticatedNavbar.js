@@ -11,7 +11,7 @@ import { logoutUser } from "../../redux/actions/userActions";
 function AuthenticatedNavbar(props) {
   const {
     authenticated,
-    user: { userRole },
+    user: { userRole, isVerified },
   } = props;
 
   const handleLogout = () => {
@@ -35,9 +35,11 @@ function AuthenticatedNavbar(props) {
           </div>
           <ul className={click ? "nav-menu active" : "nav-menu"}>
             <li>
-              <Link className="myreservation-button" onClick="">
-                My Reservations
-              </Link>
+              {isVerified && (
+                <Link className="myreservation-button" onClick="">
+                  My Reservations
+                </Link>
+              )}
             </li>
             <li>
               <Link className="myreservation-button" onClick="">
@@ -45,15 +47,11 @@ function AuthenticatedNavbar(props) {
               </Link>
             </li>
             <li>
-            {userRole === "admin" && (
-              <Button
-
-                className="logout-button"
-                href="/dashboard"
-              >
-                Dashboard
-              </Button>
-            )}
+              {userRole === "admin" && (
+                <Button className="logout-button" href="/dashboard">
+                  Dashboard
+                </Button>
+              )}
             </li>
             <li>
               <Button className="logout-button" onClick={handleLogout}>
