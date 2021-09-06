@@ -7,6 +7,8 @@ import {
   SET_BOOK,
   SET_MOVIES,
   SET_MOVIE,
+  SET_USER_BOOKS,
+  SET_USER_MOVIES,
 } from "../types";
 
 const initialState = {
@@ -54,6 +56,17 @@ export default function (state = initialState, action) {
       return {
         ...state,
         movie: action.payload,
+      };
+    case SET_USER_BOOKS:
+      return {
+        ...state,
+        books: action.payload,
+      };
+    case SET_USER_MOVIES:
+      return {
+        ...state,
+        movies: action.payload,
+        loading: false
       };
     default:
       return state;

@@ -8,6 +8,9 @@ import {
   SET_UNAUTHENTICATED,
   LOADING_USER,
   STOP_LOADING_UI,
+  LOADING_DATA,
+  SET_USER_BOOKS,
+  SET_USER_MOVIES,
 } from "../types";
 
 //Handle user registrations
@@ -34,6 +37,8 @@ export const loginUser = (user_data, history) => async (dispatch) => {
     let results = await axios.post("/login", user_data);
     setAuthorizationHeader(results.data.token);
     await dispatch(getUserData());
+    await dispatch(getUserPersonalizedBooks());
+    await dispatch(getUserPersonalizedMovies());
     dispatch({ type: CLEAR_ERRORS });
     history.push("/homepage");
   } catch (error) {
@@ -55,6 +60,36 @@ export const getUserData = () => async (dispatch) => {
     });
     return result.data;
   } catch (error) {
+    console.log(error);
+  }
+};
+
+/* Get user personalized books */
+export const getUserPersonalizedBooks = () => async (dispatch) => {
+  dispatch({ type: LOADING_DATA });
+  try {
+    let results = await axios.get("/user-books");
+    dispatch({
+      type: SET_USER_BOOKS,
+      payload: results.data.books,
+    });
+  } catch (error) {
+    dispatch({ type: SET_USER_BOOKS, payload: [] });
+    console.log(error);
+  }
+};
+
+/* Get user personalized movies */
+export const getUserPersonalizedMovies = () => async (dispatch) => {
+  dispatch({ type: LOADING_DATA });
+  try {
+    let results = await axios.get("/user-movies");
+    dispatch({
+      type: SET_USER_MOVIES,
+      payload: results.data.movies,
+    });
+  } catch (error) {
+    dispatch({ type: SET_USER_MOVIES, payload: [] });
     console.log(error);
   }
 };

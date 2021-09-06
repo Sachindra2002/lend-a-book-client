@@ -13,6 +13,8 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import "./memberHome.css";
 
+import Footer from "../../components/homepageFooter/Footer";
+
 import ManageHomepageBooks from "../../components/viewBooksHomeScreen/manageHomepageBooks";
 import ManageHomepageMovies from "../../components/viewMoviesHomeScreen/manageHomepageMovies";
 
@@ -58,6 +60,7 @@ function MemberHome(props) {
           </Col>
         </>
       </Container>
+      <Footer />
     </>
   );
 }

@@ -1,16 +1,19 @@
-import React from "react";
-import { Badge, Card, OverlayTrigger, Popover } from "react-bootstrap";
+import React, { Fragment, useEffect, useState } from "react";
+import { Badge, Card, OverlayTrigger, Popover, Modal } from "react-bootstrap";
 import PropTypes from "prop-types";
 import dayjs from "dayjs";
 
 //CSS
 import "./homepageBookCard.scss";
-
-//REDUX
 import { connect } from "react-redux";
 import { getBook } from "../../redux/actions/dataActions";
 
+import HomepageBookModal from "./homepageBookModal";
+
 function HomepageBookCard(props) {
+  const [homepageBookModalShow, setHomepageBookModalShow] =
+    React.useState(false);
+
   const {
     isbn,
     bookName,
@@ -28,8 +31,13 @@ function HomepageBookCard(props) {
     createdAt,
   } = props.book;
 
-  const handleSetBook = (id) => {
-    props.getBook(id);
+  const handleBookClick = (id) => {
+    if (!props.isBanned) {
+      setHomepageBookModalShow(true);
+    }
+    if (props.isVerified && !props.isBanned) {
+      props.getBook(id);
+    }
   };
 
   const popover = (
@@ -40,11 +48,19 @@ function HomepageBookCard(props) {
   );
 
   return (
-    <OverlayTrigger trigger="#hover" placement="top" overlay={popover}>
-      <Card className="homepage-card" onClick={() => handleSetBook(isbn)}>
-        <Card.Img variant="top" src={bookImage} className="image" />
-      </Card>
-    </OverlayTrigger>
+    <div>
+      <OverlayTrigger trigger="#hover" placement="top" overlay={popover}>
+        <Card className="homepage-card" onClick={() => handleBookClick(isbn)}>
+          <Card.Img variant="top" src={bookImage} className="image" />
+        </Card>
+      </OverlayTrigger>
+      <HomepageBookModal
+        history={props.history}
+        isVerified={props.isVerified}
+        show={homepageBookModalShow}
+        onHide={() => setHomepageBookModalShow(false)}
+      />
+    </div>
   );
 }
 
@@ -52,8 +68,17 @@ HomepageBookCard.propTypes = {
   getBook: PropTypes.func.isRequired,
 };
 
-const mapActionsToProp = {
+const mapStateToProps = (state) => ({
+  data: state.data,
+  isVerified: state.user.isVerified,
+  isBanned: state.user.isBanned,
+  authenticated: state.user.authenticated,
+  role: state.user.userRole,
+  getBook: PropTypes.func.isRequired,
+});
+
+const mapActionsTopProp = {
   getBook,
 };
 
-export default connect(null, mapActionsToProp)(HomepageBookCard);
+export default connect(mapStateToProps, mapActionsTopProp)(HomepageBookCard);

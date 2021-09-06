@@ -124,7 +124,7 @@ function ManageBooks(props) {
   const genreDropdownmarkup = BOOK_TYPES.map((type, index) => (
     <Dropdown.Item
       key={index}
-      onSelect={() => setValue("type", type.name, type.id)}
+      onSelect={() => setValue("bookGenre", type.name, type.id)}
     >
       {type.name}
     </Dropdown.Item>

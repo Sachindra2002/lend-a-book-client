@@ -8,12 +8,13 @@ import {
   FormControl,
   Dropdown,
   Carousel,
+  Alert,
 } from "react-bootstrap";
 import PropTypes from "prop-types";
 
 //REDUX
 import { connect } from "react-redux";
-import { getAllBooks } from "../../redux/actions/dataActions";
+import { getUserPersonalizedBooks } from "../../redux/actions/userActions";
 
 //Import Components
 import BookCard from "./homepageBookCard";
@@ -28,13 +29,14 @@ function ManageHomepageBooks(props) {
   const [bookPool, setBookPool] = useState([]);
   const [genre, setGenre] = useState("Book Genre");
 
+
   const {
     data: { books, loading },
   } = props;
 
   //When component is initiated, get all books from the backend
   useEffect(() => {
-    props.getAllBooks();
+    props.getUserPersonalizedBooks();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -121,7 +123,7 @@ function ManageHomepageBooks(props) {
   const genreDropdownmarkup = BOOK_TYPES.map((type, index) => (
     <Dropdown.Item
       key={index}
-      onSelect={() => setValue("type", type.name, type.id)}
+      onSelect={() => setValue("bookGenre", type.name, type.id)}
     >
       {type.name}
     </Dropdown.Item>
@@ -206,15 +208,20 @@ function ManageHomepageBooks(props) {
 }
 
 ManageHomepageBooks.propTypes = {
-  getAllBooks: PropTypes.func.isRequired,
+  getUserPersonalizedBooks: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   data: state.data,
+  isVerified: state.user.isVerified,
+  isBanned: state.user.isBanned,
+  authenticated: state.user.authenticated,
+  role: state.user.userRole,
+  books: state.data.books,
 });
 
 const mapActionsTopProp = {
-  getAllBooks,
+  getUserPersonalizedBooks,
 };
 
 export default connect(mapStateToProps, mapActionsTopProp)(ManageHomepageBooks);

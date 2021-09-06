@@ -13,6 +13,7 @@ import {
   CLEAR_ERRORS,
   SET_ERRORS,
 } from "../types";
+import { getUserPersonalizedBooks } from "./userActions";
 
 /* Get all users pending for verification */
 export const getAllUsers = () => async (dispatch) => {
@@ -221,3 +222,15 @@ export const removeMovie = (id) => async (dispatch) => {
     });
   }
 };
+
+/* add comment to a book */
+export const addCommentBook = (comment) => async (dispatch) => {
+  try{
+    let results = await axios.post("/comment-addcomment" ,comment);
+    dispatch(getUserPersonalizedBooks());
+    dispatch(getBook());
+    
+  } catch (error){
+    console.log(error);
+  }
+}

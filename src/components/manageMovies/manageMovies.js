@@ -7,6 +7,7 @@ import {
   Row,
   FormControl,
   Dropdown,
+  Alert,
 } from "react-bootstrap";
 import PropTypes from "prop-types";
 
@@ -125,7 +126,7 @@ function ManageMovies(props) {
   const genreDropdownmarkup = MOVIE_TYPES.map((type, index) => (
     <Dropdown.Item
       key={index}
-      onSelect={() => setValue("type", type.name, type.id)}
+      onSelect={() => setValue("movieGenre", type.name, type.id)}
     >
       {type.name}
     </Dropdown.Item>
@@ -240,7 +241,10 @@ function ManageMovies(props) {
           ))
         )}
       </Row>
-      <AddMovieModal show={addModalShow} onHide={() => setAddModalShow(false)} />
+      <AddMovieModal
+        show={addModalShow}
+        onHide={() => setAddModalShow(false)}
+      />
     </div>
   );
 }

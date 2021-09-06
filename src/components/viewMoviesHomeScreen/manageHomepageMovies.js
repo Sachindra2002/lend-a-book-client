@@ -12,7 +12,7 @@ import PropTypes from "prop-types";
 
 //REDUX
 import { connect } from "react-redux";
-import { getAllMovies } from "../../redux/actions/dataActions";
+import { getUserPersonalizedMovies } from "../../redux/actions/userActions";
 
 //Import Components
 import MovieCard from "./homepageMovieCard";
@@ -31,7 +31,7 @@ function ManageHomepageMovies(props) {
 
   //When component is initiated, get all movies from the backend
   useEffect(() => {
-    props.getAllMovies();
+    props.getUserPersonalizedMovies();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -117,7 +117,7 @@ function ManageHomepageMovies(props) {
   const genreDropdownmarkup = MOVIE_TYPES.map((type, index) => (
     <Dropdown.Item
       key={index}
-      onSelect={() => setValue("type", type.name, type.id)}
+      onSelect={() => setValue("movieGenre", type.name, type.id)}
     >
       {type.name}
     </Dropdown.Item>
@@ -202,7 +202,7 @@ function ManageHomepageMovies(props) {
 }
 
 ManageHomepageMovies.propTypes = {
-  getAllMovies: PropTypes.func.isRequired,
+  getUserPersonalizedMovies: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -210,7 +210,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapActionsToProps = {
-  getAllMovies,
+  getUserPersonalizedMovies,
 };
 
 export default connect(
