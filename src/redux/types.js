@@ -20,6 +20,5 @@ export const SET_BOOK = "SET_BOOK";
 export const SET_MOVIES = "SET_MOVIES";
 export const SET_MOVIE = "SET_MOVIE";
 export const SET_USER_BOOKS = "SET_USER_BOOKS";
-export const SET_USER_BOOK = "SET_USER_BOOK";
 export const SET_USER_MOVIES = "SET_USER_MOVIES";
-export const SET_USER_MOVIE = "SET_USER_MOVIE";
+export const SET_COMMENTS = "SET_COMMENTS";

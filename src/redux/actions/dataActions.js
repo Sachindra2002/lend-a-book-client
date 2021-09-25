@@ -12,6 +12,7 @@ import {
   SET_MOVIE,
   CLEAR_ERRORS,
   SET_ERRORS,
+  SET_COMMENTS,
 } from "../types";
 import { getUserPersonalizedBooks } from "./userActions";
 
@@ -85,9 +86,11 @@ export const getAllBooks = () => async (dispatch) => {
 /*Get single book info */
 export const getBook = (id) => async (dispatch) => {
   try {
-    dispatch({ type: LOADING_UI });
+    await dispatch({ type: LOADING_UI });
     let result = await axios.get(`/book/${id}`);
-    dispatch({ type: SET_BOOK, payload: result.data });
+    let comments = await axios.get(`/book-comments/${id}`)
+    await dispatch({ type: SET_BOOK, payload: result.data });
+    await dispatch( {type: SET_COMMENTS, payload: comments.data.comments});
     dispatch({ type: STOP_LOADING_UI });
   } catch (error) {
     dispatch({ type: SET_BOOK, payload: {} });
@@ -225,12 +228,12 @@ export const removeMovie = (id) => async (dispatch) => {
 
 /* add comment to a book */
 export const addCommentBook = (comment) => async (dispatch) => {
-  try{
-    let results = await axios.post("/comment-addcomment" ,comment);
+  try {
+    let results = await axios.post("/comment-addcomment", comment);
     dispatch(getUserPersonalizedBooks());
     dispatch(getBook());
-    
-  } catch (error){
+  } catch (error) {
     console.log(error);
   }
-}
+};
+

@@ -9,6 +9,7 @@ import {
   SET_MOVIE,
   SET_USER_BOOKS,
   SET_USER_MOVIES,
+  SET_COMMENTS,
 } from "../types";
 
 const initialState = {
@@ -66,7 +67,13 @@ export default function (state = initialState, action) {
       return {
         ...state,
         movies: action.payload,
-        loading: false
+        loading: false,
+      };
+    case SET_COMMENTS:
+      return {
+        ...state,
+        comments: action.payload,
+        loading: false,
       };
     default:
       return state;

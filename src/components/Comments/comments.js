@@ -1,35 +1,40 @@
-import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Modal, Button, Form, Col, Row } from "react-bootstrap";
+import PropTypes from "prop-types";
+//REDUX
+import { connect } from "react-redux";
+
+//Import Components
+import CommentCard from "./commentCard";
 
 function Comment(props) {
   const [content, setContent] = useState("");
+  const [_comments, setComments] = useState([]);
+  const [commentPool, setCommentPool] = useState([]);
+
+  const {
+    data: { comments, loading },
+  } = props;
+
+  //When comment list is passed from props are updated, update state variables
+  useEffect(() => {
+    if (comments) {
+      setComments(comments);
+      setCommentPool(comments);
+    }
+  }, [comments]);
+
+  //Function to create a list of comment cards from comment list in state
+  let commentsMarkup = _comments.map((comment) => (
+    <CommentCard key={comment.id} comment={comment} />
+  ));
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    const data = {
-      content: content,
-      bookISBN: props.isbn,
-    };
-
-    // axios.post("comment-addcommentbook", data)
-    //     .then(response.data.success){
-    //         console.log(object)
-    //     }else {
-    //         alert(" Failed to add comment");
-    //     };
-
-    //props.submitComment(data, props.history);
   };
   return (
     <div>
-      <br />
-      <p style={{ marginLeft: "5px" }}>replies</p>
       <hr />
-      {/* Comment lists */}
-
-      {/* Root Comment Form */}
       <Form onSubmit={handleSubmit}>
         <Row>
           <Col>
@@ -37,7 +42,6 @@ function Comment(props) {
               as="textarea"
               placeholder="Write a comment"
               onChange={(e) => setContent(e.target.value)}
-              //   style={{ width: "100", borderRadius: "5px" }}
             />
           </Col>
         </Row>
@@ -50,8 +54,28 @@ function Comment(props) {
           </Col>
         </Row>
       </Form>
+      <div>
+        {loading ? (
+          <p>Loading...</p>
+        ) : (
+          commentsMarkup.map((card, index) => (
+            <Row>
+              <Col key={index}>{card}</Col>
+            </Row>
+          ))
+        )}
+      </div>
     </div>
   );
 }
 
-export default Comment;
+Comment.propTypes = {};
+
+const mapStateToProps = (state) => ({
+  comments: state.data.comments,
+  data: state.data,
+});
+
+const mapActionsTopProp = {};
+
+export default connect(mapStateToProps, mapActionsTopProp)(Comment);

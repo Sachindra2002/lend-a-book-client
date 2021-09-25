@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="aa990c1e-5fe1-4417-b93b-c8315f21844f" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/src/components/Comments/comments.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Comments/comments.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/viewBooksHomeScreen/homepageBookCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/viewBooksHomeScreen/homepageBookCard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/actions/dataActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/actions/dataActions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/reducers/dataReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/reducers/dataReducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/types.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/types.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1y8wPgBRpfYkrONJlhwTCEqJXyD" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="aa990c1e-5fe1-4417-b93b-c8315f21844f" name="Changes" comment="" />
+      <created>1631646503187</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1631646503187</updated>
+      <workItem from="1631646506412" duration="27000" />
+      <workItem from="1632560217883" duration="9000" />
+    </task>
+    <servers />
+  </component>
+</project>
