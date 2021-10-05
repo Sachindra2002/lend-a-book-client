@@ -14,27 +14,63 @@ import { connect } from "react-redux";
 import "./commentCard.css";
 
 function CommentCard(props) {
-  const { id, isbn, email, content, createdAt } = props.comment;
-
+  //const { id, isbn, email, content, createdAt, firstName } = props.comment;
+  const {
+    UI: { loading },
+    user,
+    comment,
+  } = props;
   return (
-    <Card style={{marginTop: "10px"}}>
-      <Card.Body>
-        <span style={{fontFamily: "Calibri"}}>{"  "}{email}</span><span style={{float: "right", fontFamily: "Calibri"}}>{`${dayjs(createdAt)
-          .format("DD/MM/YYYY", {
-            timeZone: "Asia/Colombo",
-          })
-          .toString()}`}</span><br/><br/>
-        <span>{"  "}{content}</span>
-        <span style={{float: "right"}}><i class="fas fa-heart"></i></span>
-      </Card.Body>
-    </Card>
+    <Fragment>
+      {loading ? (
+        <p>Loading...</p>
+      ) : comment ? (
+        <>
+          <Card style={{ marginTop: "10px" }}>
+            <Card.Body>
+              <span style={{ fontFamily: "Calibri" }}>
+                {"  "}
+                {comment.email}
+              </span>
+              <span style={{ float: "right", fontFamily: "Calibri" }}>
+                {`${dayjs(comment.createdAt)
+                  .format("DD/MM/YYYY", {
+                    timeZone: "Asia/Colombo",
+                  })
+                  .toString()}`}{" "}
+                {comment.email === user.email && (
+                  <span style={{ marginLeft: "10px" }}>
+                    <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                  </span>
+                )}
+              </span>
+              <br />
+              <br />
+              <span>
+                {"  "}
+                {comment.content}
+              </span>
+              <span style={{ float: "right" }}>
+                <i class="fas fa-heart"></i>
+              </span>
+            </Card.Body>
+          </Card>
+        </>
+      ) : null}
+    </Fragment>
   );
 }
 
-CommentCard.propTypes = {};
+CommentCard.propTypes = {
+  user: PropTypes.object,
+  comment: PropTypes.object,
+  UI: PropTypes.object.isRequired,
+};
 
 const mapStateToProps = (state) => ({
   data: state.data,
+  user: state.user,
+  UI: state.UI,
 });
 
 const mapActionsToProp = {};

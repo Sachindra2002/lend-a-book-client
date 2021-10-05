@@ -51,7 +51,7 @@ function App() {
           <ScrollToTop />
           <Switch>
             <AuthRoute path="/" exact component={Home} />
-            <AuthRoute path="/sign-in" exact component={Login} />
+            <Route path="/sign-in" exact component={Login} />
             <AuthRoute path="/register" exact component={Register} />
             <AuthRouteAll path="/homepage" exact component={MemberHome} />
             <AuthRouteAdmin path="/dashboard" exact component={Dashboard} />

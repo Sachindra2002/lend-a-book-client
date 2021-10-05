@@ -98,11 +98,6 @@ function HomepageBookModal(props) {
               </Col>
             </Row>
             <Row>
-              <div style={{ fontSize: 20, marginLeft: 20, marginTop: 20 }}>
-                Comments
-              </div>
-            </Row>
-            <Row>
               <Col>
                 <Comments isbn={book.isbn}/>
               </Col>

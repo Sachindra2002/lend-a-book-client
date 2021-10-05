@@ -40,6 +40,7 @@ function MemberHome(props) {
           variant="danger"
           className="not-verified-message"
           hidden={props.isVerified}
+          style={{ marginLeft: "10px", marginRight: "10px"}}
         >
           {`Hello ${props.firstName} ${props.lastName}! `}
           You are <b>not verified,</b> You will not be able to do any

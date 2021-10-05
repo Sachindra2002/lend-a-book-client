@@ -12,6 +12,8 @@ function Comment(props) {
   const [_comments, setComments] = useState([]);
   const [commentPool, setCommentPool] = useState([]);
 
+  var counter = 0;
+
   const {
     data: { comments, loading },
   } = props;
@@ -26,6 +28,7 @@ function Comment(props) {
 
   //Function to create a list of comment cards from comment list in state
   let commentsMarkup = _comments.map((comment) => (
+    counter = counter + 1,
     <CommentCard key={comment.id} comment={comment} />
   ));
 
@@ -34,6 +37,8 @@ function Comment(props) {
   };
   return (
     <div>
+      
+      <p style={{fontSize: "22px", marginTop: "20px"}}>Comments ( {counter} )</p>
       <hr />
       <Form onSubmit={handleSubmit}>
         <Row>
