@@ -22,3 +22,9 @@ export const SET_MOVIE = "SET_MOVIE";
 export const SET_USER_BOOKS = "SET_USER_BOOKS";
 export const SET_USER_MOVIES = "SET_USER_MOVIES";
 export const SET_COMMENTS = "SET_COMMENTS";
+
+/* CART REDUCER TYPES */
+export const ADD_TO_CART = "ADD_TO_CART";
+export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
+export const ADJUST_QTY = "ADJUST_QTY";
+export const LOAD_CURRENT_ITEM = "LOAD_CURRENT_ITEM";

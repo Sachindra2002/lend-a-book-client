@@ -47,9 +47,8 @@ function MemberHome(props) {
           reservations until human verification is passed.{" "}
         </Alert>
       </div>
-      <div className="greeting">{greeting}</div>{" "}
       <div className="greeting-name">
-        {props.firstName} {props.lastName}
+        Welcome Back, {props.firstName}
       </div>
       <Container fluid>
         <>

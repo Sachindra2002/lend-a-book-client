@@ -24,6 +24,7 @@ import { logoutUser, getUserData } from "./redux/actions/userActions";
 import AuthRoute from "./utils/authRoute";
 import AuthRouteAdmin from "./utils/authRouteAdmin";
 import AuthRouteAll from "./utils/authRouteAll";
+import Basket from "./components/cart/cart";
 
 axios.defaults.baseURL = "http://localhost:5000";
 
@@ -55,6 +56,7 @@ function App() {
             <AuthRoute path="/register" exact component={Register} />
             <AuthRouteAll path="/homepage" exact component={MemberHome} />
             <AuthRouteAdmin path="/dashboard" exact component={Dashboard} />
+            <AuthRouteAll path="/cart" exact component={Basket} />
             <Route path="" exact component={Error404} />
           </Switch>
         </Router>

@@ -34,9 +34,10 @@ function AuthenticatedNavbar(props) {
             <i className={click ? "fas fa-times" : "fas fa-bars"} />
           </div>
           <ul className={click ? "nav-menu active" : "nav-menu"}>
+
             <li>
               {isVerified && (
-                <Link className="myreservation-button" onClick="">
+                <Link className="myreservation-button" to="/cart">
                   My Reservations
                 </Link>
               )}

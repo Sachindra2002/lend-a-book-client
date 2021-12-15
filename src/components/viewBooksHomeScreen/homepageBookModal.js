@@ -1,4 +1,6 @@
 import React, { useState, useEffect, Fragment } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import {
   Modal,
   Button,
@@ -15,8 +17,11 @@ import Comments from "../../components/Comments/comments";
 
 //REDUX
 import { connect } from "react-redux";
+import { addToCart } from "../../redux/actions/cartAction";
 
 function HomepageBookModal(props) {
+  let history = useHistory();
+  const dispatch = useDispatch();
   //Destructure props
   const {
     UI: { loading },
@@ -37,6 +42,10 @@ function HomepageBookModal(props) {
     event.preventDefault();
   };
 
+  const addToCartHandler = () => {
+    dispatch(addToCart(book.isbn, 1));
+    history.push("/cart");
+  };
   const newProps = { ...props };
 
   //Remove unwanted props before passing props to modal
@@ -91,7 +100,9 @@ function HomepageBookModal(props) {
                   </Col>
                   <Col>
                     <div>
-                      <Button variant="primary">Reserve Now</Button>
+                      <Button variant="primary" onClick={addToCartHandler}>
+                        Reserve Now
+                      </Button>
                     </div>
                   </Col>
                 </Row>
@@ -99,7 +110,7 @@ function HomepageBookModal(props) {
             </Row>
             <Row>
               <Col>
-                <Comments isbn={book.isbn}/>
+                <Comments isbn={book.isbn} />
               </Col>
             </Row>
           </Card.Body>

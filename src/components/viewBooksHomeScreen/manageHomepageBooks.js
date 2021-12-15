@@ -11,6 +11,7 @@ import {
   Alert,
 } from "react-bootstrap";
 import PropTypes from "prop-types";
+import { Link, useHistory } from "react-router-dom";
 
 //REDUX
 import { connect } from "react-redux";
@@ -29,6 +30,7 @@ function ManageHomepageBooks(props) {
   const [bookPool, setBookPool] = useState([]);
   const [genre, setGenre] = useState("Book Genre");
 
+  let history = useHistory();
 
   const {
     data: { books, loading },
@@ -119,6 +121,10 @@ function ManageHomepageBooks(props) {
     setBookPool(books);
   };
 
+  const handleClick = () => {
+    history.push("/cart")
+  }
+
   //Drop down for select genre of book
   const genreDropdownmarkup = BOOK_TYPES.map((type, index) => (
     <Dropdown.Item
@@ -161,22 +167,6 @@ function ManageHomepageBooks(props) {
                 </Dropdown.Toggle>
                 <Dropdown.Menu>{genreDropdownmarkup}</Dropdown.Menu>
               </Dropdown>
-              <Dropdown className="homepage-dropdown">
-                <Dropdown.Toggle
-                  variant="outline-secondary"
-                  id="dropdown-basic"
-                  style={{ width: "100%" }}
-                >
-                  Rating
-                </Dropdown.Toggle>
-                <Dropdown.Menu>
-                  <Dropdown.Item>1 Star</Dropdown.Item>
-                  <Dropdown.Item>2 Star</Dropdown.Item>
-                  <Dropdown.Item>3 Star</Dropdown.Item>
-                  <Dropdown.Item>4 Star</Dropdown.Item>
-                  <Dropdown.Item>5 Star</Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
               <Button
                 variant="outline-danger"
                 className="homepage-dropdown"
@@ -186,6 +176,13 @@ function ManageHomepageBooks(props) {
                   <i className="fas fa-times reset-icon"></i>
                 </span>
                 Reset
+              </Button>{" "}
+              <Button
+                variant="outline-primary"
+                className="homepage-dropdown"
+                onClick={handleClick}
+              >
+                Check Cart
               </Button>{" "}
             </Row>
           </Col>

@@ -21,7 +21,6 @@
 .navbar-logo {
   color: #fff;
   justify-self: start;
-  margin-left: 20px;
   padding-bottom: 20px;
   cursor: pointer;
   text-decoration: none;
@@ -29,6 +28,11 @@
   display: flex;
   align-items: center;
   text-decoration: none;
+}
+
+.navbar-logo:hover{
+  text-decoration: none;
+  color: white;
 }
 
 .navbar-logo :hover {
@@ -94,6 +98,10 @@
 
 .nav-links-mobile {
   display: none;
+}
+
+.cartlogo__badge {
+  margin-left: 10px;
 }
 
 .menu-icon {

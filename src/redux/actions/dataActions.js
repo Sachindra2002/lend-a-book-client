@@ -88,9 +88,9 @@ export const getBook = (id) => async (dispatch) => {
   try {
     await dispatch({ type: LOADING_UI });
     let result = await axios.get(`/book/${id}`);
-    let comments = await axios.get(`/book-comments/${id}`)
+    let comments = await axios.get(`/book-comments/${id}`);
     await dispatch({ type: SET_BOOK, payload: result.data });
-    await dispatch( {type: SET_COMMENTS, payload: comments.data.comments});
+    await dispatch({ type: SET_COMMENTS, payload: comments.data.comments });
     dispatch({ type: STOP_LOADING_UI });
   } catch (error) {
     dispatch({ type: SET_BOOK, payload: {} });
@@ -237,3 +237,17 @@ export const addCommentBook = (comment) => async (dispatch) => {
   }
 };
 
+export const reserveBooks = (data, history) => async (dispatch) => {
+  dispatch({ type: LOADING_UI });
+
+  try {
+    let results = await axios.post("/reserve", data);
+    dispatch({ type: CLEAR_ERRORS });
+    history.push("/homepage");
+  } catch (error) {
+    dispatch({
+      type: SET_ERRORS,
+      payload: error.response?.data,
+    });
+  }
+};
