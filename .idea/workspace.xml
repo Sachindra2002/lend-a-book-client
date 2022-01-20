@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="aa990c1e-5fe1-4417-b93b-c8315f21844f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/components/AuthenticatedNavbar/AuthenticatedNavbar.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AuthenticatedNavbar/AuthenticatedNavbar.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/MemberHome/memberHome.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/MemberHome/memberHome.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/MemberHome/memberHome.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/MemberHome/memberHome.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Register/signup.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Register/signup.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/DashboardNavbar/DashboardNavbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/DashboardNavbar/DashboardNavbar.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,6 +36,8 @@
       <workItem from="1631646506412" duration="27000" />
       <workItem from="1632560217883" duration="9000" />
       <workItem from="1634542838497" duration="507000" />
+      <workItem from="1642182643215" duration="21000" />
+      <workItem from="1642200987132" duration="597000" />
     </task>
     <servers />
   </component>

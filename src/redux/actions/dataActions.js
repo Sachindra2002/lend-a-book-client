@@ -13,6 +13,8 @@ import {
   CLEAR_ERRORS,
   SET_ERRORS,
   SET_COMMENTS,
+  SET_BOOK_RESERVATIONS,
+  SET_SCRAPED_BOOKS,
 } from "../types";
 import { getUserPersonalizedBooks } from "./userActions";
 
@@ -249,5 +251,44 @@ export const reserveBooks = (data, history) => async (dispatch) => {
       type: SET_ERRORS,
       payload: error.response?.data,
     });
+  }
+};
+
+export const getAllBookReservations = () => async (dispatch) => {
+  dispatch({ type: LOADING_DATA });
+  try {
+    let results = await axios.get("/book-reservations");
+    dispatch({
+      type: SET_BOOK_RESERVATIONS,
+      payload: results.data.book_reservations,
+    });
+  } catch (error) {
+    dispatch({ type: SET_BOOK_RESERVATIONS, payload: [] });
+    console.log(error);
+  }
+};
+
+/* Change reservation status */
+export const changeReservationStatus = (id, status) => async (dispatch) => {
+  try {
+    await axios.post(`/reservation-status/${id}`, { status });
+    dispatch(getAllBookReservations());
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+/* Get all scraped data for books */
+export const getAllBookPrices = () => async (dispatch) => {
+  dispatch({ type: LOADING_DATA });
+  try {
+    let results = await axios.get("/new-books");
+    dispatch({
+      type: SET_SCRAPED_BOOKS,
+      payload: results.data.books,
+    });
+  } catch (error) {
+    dispatch({ type: SET_SCRAPED_BOOKS, payload: [] });
+    console.log(error);
   }
 };

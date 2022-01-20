@@ -10,6 +10,8 @@ import {
   SET_USER_BOOKS,
   SET_USER_MOVIES,
   SET_COMMENTS,
+  SET_BOOK_RESERVATIONS,
+  SET_SCRAPED_BOOKS,
 } from "../types";
 
 const initialState = {
@@ -62,6 +64,18 @@ export default function (state = initialState, action) {
       return {
         ...state,
         books: action.payload,
+      };
+    case SET_BOOK_RESERVATIONS:
+      return {
+        ...state,
+        bookReservations: action.payload,
+        loading: false,
+      };
+    case SET_SCRAPED_BOOKS:
+      return {
+        ...state,
+        books: action.payload,
+        loading: false,
       };
     case SET_USER_MOVIES:
       return {

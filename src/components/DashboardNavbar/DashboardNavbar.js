@@ -30,6 +30,11 @@ const DashboardNavbar = (props) => {
       id === "reservation-dashboard-icon"
     ) {
       props.setDashboard(3);
+    } else if (
+      id === "compare-book-dashboard-button" ||
+      id === "compare-book-dashboard-icon"
+    ) {
+      props.setDashboard(5);
     }
   };
 
@@ -100,7 +105,71 @@ const DashboardNavbar = (props) => {
           >
             <span id="reservation-dashboard-icon" onClick={handleSetDashboard}>
               <i className="fas fa-file-invoice-dollar icon"></i>
-              Reservations
+              Reservations / Books
+            </span>
+          </Button>
+        </Nav.Item>
+        <Nav.Item className="sidebar-item">
+          <Button
+            variant="dark"
+            className={`sidebar-button ${
+              dashboard === 4 && "sidebar-button-active"
+            }`}
+            size="lg"
+            id="reservation-dashboard-button"
+            // onClick={handleSetDashboard}
+          >
+            <span id="reservation-dashboard-icon" onClick={handleSetDashboard}>
+              <i className="fas fa-file-invoice-dollar icon"></i>
+              Reservations / Movies
+            </span>
+          </Button>
+        </Nav.Item>
+        <Nav.Item className="sidebar-item">
+          <Button
+            variant="dark"
+            className={`sidebar-button ${
+              dashboard === 5 && "sidebar-button-active"
+            }`}
+            size="lg"
+            id="compare-book-dashboard-button"
+            onClick={handleSetDashboard}
+          >
+            <span id="compare-book-dashboard-icon" onClick={handleSetDashboard}>
+              <i className="fa fa-money icon"></i>
+              Compare Book Prices
+            </span>
+          </Button>
+        </Nav.Item>
+        <Nav.Item className="sidebar-item">
+          <Button
+            variant="dark"
+            className={`sidebar-button ${
+              dashboard === 6 && "sidebar-button-active"
+            }`}
+            size="lg"
+            id="reservation-dashboard-button"
+            // onClick={handleSetDashboard}
+          >
+            <span id="reservation-dashboard-icon" onClick={handleSetDashboard}>
+              <i className="fa fa-money icon"></i>
+              Compare Movie Prices
+            </span>
+          </Button>
+        </Nav.Item>
+        <Nav.Item className="sidebar-item">
+          <Button
+            variant="dark"
+            className={`sidebar-button ${
+              dashboard === 7 && "sidebar-button-active"
+            }`}
+            size="lg"
+            id="reservation-dashboard-button"
+            // onClick={handleSetDashboard}
+          >
+            <span id="reservation-dashboard-icon" onClick={handleSetDashboard}>
+              <i className="fa fa-cart-plus icon"></i>
+              Puchase Books
             </span>
           </Button>
         </Nav.Item>

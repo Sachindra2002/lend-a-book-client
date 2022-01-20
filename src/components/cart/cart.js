@@ -61,7 +61,7 @@ function CartScreen(props) {
     event.preventDefault();
     const data = {
       reservationDate: reservationDate,
-      charge: getTotal(),
+      charges: getTotal(),
       books: books,
     };
     console.log(data);

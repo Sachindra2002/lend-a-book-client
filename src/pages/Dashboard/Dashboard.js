@@ -15,6 +15,10 @@ import ViewBook from "../../components/manageBooks/viewBook";
 import ManageMovies from "../../components/manageMovies/manageMovies";
 import ViewMovie from "../../components/manageMovies/viewMovie";
 
+import ManageBookReservation from "../../components/ManageBooksReservation/manageBooksResevation";
+
+import ManageCompareBookPrices from "../../components/CompareBookPrices/manageCompareBookPrices";
+
 //Redux
 import { connect } from "react-redux";
 
@@ -33,7 +37,11 @@ const Dashboard = (props) => {
           </Col>
           {dashboard === 3 ? (
             <Col xs={10} id="page-content-wrapper">
-              Reservations
+              <ManageBookReservation />
+            </Col>
+          ) : dashboard === 5 ? (
+            <Col xs={10} id="page-content-wrapper">
+              <ManageCompareBookPrices />
             </Col>
           ) : (
             <>
@@ -43,7 +51,7 @@ const Dashboard = (props) => {
                 ) : dashboard === 1 ? (
                   <ManageBooks />
                 ) : (
-                  <ManageMovies/>
+                  <ManageMovies />
                 )}
               </Col>
               <Col xs={3} id="page-content-wrapper">
@@ -52,7 +60,7 @@ const Dashboard = (props) => {
                 ) : dashboard === 1 ? (
                   <ViewBook />
                 ) : (
-                  <ViewMovie/>
+                  <ViewMovie />
                 )}
               </Col>
             </>

@@ -1,6 +1,9 @@
 import React, { useState, useEffect, Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { Document, Page } from "react-pdf/dist/esm/entry.webpack";
+import "react-pdf/dist/esm/Page/AnnotationLayer.css";
+import { pdfjs } from "react-pdf";
 import {
   Modal,
   Button,
@@ -19,6 +22,13 @@ import Comments from "../../components/Comments/comments";
 import { connect } from "react-redux";
 import { addToCart } from "../../redux/actions/cartAction";
 
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
+
+const options = {
+  cMapUrl: "cmaps/",
+  cMapPacked: true,
+};
+
 function HomepageBookModal(props) {
   let history = useHistory();
   const dispatch = useDispatch();
@@ -28,7 +38,27 @@ function HomepageBookModal(props) {
     book,
   } = props;
 
+  const [bookFileModalShow, setBookFileModalShow] = useState(false);
+  const [numPages, setNumPages] = useState(null);
+  const [pageNumber, setPageNumber] = useState(1);
   const [errors, setErrors] = useState({});
+
+  function onDocumentLoadSuccess({ numPages }) {
+    setNumPages(numPages);
+    setPageNumber(1);
+  }
+
+  function changePage(offset) {
+    setPageNumber((prevPageNumber) => prevPageNumber + offset);
+  }
+
+  function previousPage() {
+    changePage(-1);
+  }
+
+  function nextPage() {
+    changePage(1);
+  }
 
   //When errors are updated the component is re-rendered to display errors
   useEffect(() => {
@@ -95,7 +125,12 @@ function HomepageBookModal(props) {
                 <Row>
                   <Col>
                     <div>
-                      <Button variant="secondary">Read Online</Button>
+                      <Button
+                        variant="secondary"
+                        onClick={() => setBookFileModalShow(true)}
+                      >
+                        Read Online
+                      </Button>
                     </div>
                   </Col>
                   <Col>
@@ -115,6 +150,49 @@ function HomepageBookModal(props) {
             </Row>
           </Card.Body>
         </Card>
+        <Modal
+          show={bookFileModalShow}
+          onHide={() => setBookFileModalShow(false)}
+          size="lg"
+          aria-labelledby="contained-modal-title-vcenter"
+          centered
+        >
+          <Modal.Header closeButton>{book.bookTitle}</Modal.Header>
+          <Modal.Body>
+            <div className="Example__container__document">
+              <Document
+                centered
+                file={book.bookFile}
+                onLoadSuccess={onDocumentLoadSuccess}
+                options={options}
+              >
+                <Page pageNumber={pageNumber} />
+              </Document>
+              <div>
+                <p>
+                  Page {pageNumber || (numPages ? 1 : "--")} of{" "}
+                  {numPages || "--"}
+                </p>
+                <button
+                  className="prev-page"
+                  type="button"
+                  disabled={pageNumber <= 1}
+                  onClick={previousPage}
+                >
+                  Previous
+                </button>
+                <button
+                  className="prev-page"
+                  type="button"
+                  disabled={pageNumber >= numPages}
+                  onClick={nextPage}
+                >
+                  Next
+                </button>
+              </div>
+            </div>
+          </Modal.Body>
+        </Modal>
       </Modal.Body>
     </Modal>
   ) : null;
