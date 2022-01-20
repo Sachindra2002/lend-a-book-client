@@ -35,6 +35,8 @@ const DashboardNavbar = (props) => {
       id === "compare-book-dashboard-icon"
     ) {
       props.setDashboard(5);
+    } else if (id === "purchase-books-button" || id === "purchase-books-icon") {
+      props.setDashboard(7)
     }
   };
 
@@ -164,10 +166,10 @@ const DashboardNavbar = (props) => {
               dashboard === 7 && "sidebar-button-active"
             }`}
             size="lg"
-            id="reservation-dashboard-button"
-            // onClick={handleSetDashboard}
+            id="purchase-books-button"
+            onClick={handleSetDashboard}
           >
-            <span id="reservation-dashboard-icon" onClick={handleSetDashboard}>
+            <span id="purchase-books-icon" onClick={handleSetDashboard}>
               <i className="fa fa-cart-plus icon"></i>
               Puchase Books
             </span>

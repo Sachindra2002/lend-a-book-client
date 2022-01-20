@@ -15,6 +15,7 @@ import {
   SET_COMMENTS,
   SET_BOOK_RESERVATIONS,
   SET_SCRAPED_BOOKS,
+  SET_CSV_BOOKS,
 } from "../types";
 import { getUserPersonalizedBooks } from "./userActions";
 
@@ -111,6 +112,20 @@ export const addBook = (book) => async (dispatch) => {
 
     //Prevent modal from closing after errors are displayed
     if (results.data.isbn) return true;
+  } catch (error) {
+    dispatch({
+      type: SET_ERRORS,
+      payload: error.response.data,
+    });
+  }
+};
+
+export const addBookFromCSV = (book) => async (dispatch) => {
+  dispatch({ type: LOADING_UI });
+
+  try {
+    let results = await axios.post("/add-book", book);
+    await dispatch(getAllCSVBooks());
   } catch (error) {
     dispatch({
       type: SET_ERRORS,
@@ -289,6 +304,21 @@ export const getAllBookPrices = () => async (dispatch) => {
     });
   } catch (error) {
     dispatch({ type: SET_SCRAPED_BOOKS, payload: [] });
+    console.log(error);
+  }
+};
+
+/* Get all books in CSV file */
+export const getAllCSVBooks = () => async (dispatch) => {
+  dispatch({ type: LOADING_DATA });
+  try {
+    let results = await axios.get("/purchased-books");
+    dispatch({
+      type: SET_CSV_BOOKS,
+      payload: results.data.books,
+    });
+  } catch (error) {
+    dispatch({ type: SET_CSV_BOOKS, payload: [] });
     console.log(error);
   }
 };

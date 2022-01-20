@@ -19,6 +19,7 @@ import ManageBookReservation from "../../components/ManageBooksReservation/manag
 
 import ManageCompareBookPrices from "../../components/CompareBookPrices/manageCompareBookPrices";
 
+import ManagePurchaseBooks from "../../components/PurchaseBooks/managaPurchaseBooks";
 //Redux
 import { connect } from "react-redux";
 
@@ -42,6 +43,10 @@ const Dashboard = (props) => {
           ) : dashboard === 5 ? (
             <Col xs={10} id="page-content-wrapper">
               <ManageCompareBookPrices />
+            </Col>
+          ) : dashboard === 7 ? (
+            <Col xs={10} id="page-content-wrapper">
+              <ManagePurchaseBooks />
             </Col>
           ) : (
             <>

@@ -12,6 +12,7 @@ import {
   SET_COMMENTS,
   SET_BOOK_RESERVATIONS,
   SET_SCRAPED_BOOKS,
+  SET_CSV_BOOKS,
 } from "../types";
 
 const initialState = {
@@ -72,6 +73,12 @@ export default function (state = initialState, action) {
         loading: false,
       };
     case SET_SCRAPED_BOOKS:
+      return {
+        ...state,
+        books: action.payload,
+        loading: false,
+      };
+    case SET_CSV_BOOKS:
       return {
         ...state,
         books: action.payload,
