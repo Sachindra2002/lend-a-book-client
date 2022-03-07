@@ -1,5 +1,8 @@
 # Lend a Book
 
+https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+https://img.shields.io/badge/Redux-593D88?style=for-the-badge&logo=redux&logoColor=white
+
 ![homepage books](https://user-images.githubusercontent.com/52739523/156985737-5764c251-9c22-4d9c-b5bc-6ee5fcb9f801.png)
 
 ![homepage book view](https://user-images.githubusercontent.com/52739523/156985743-745e0c4c-2fd8-4909-b7f2-83346a542db4.png)
