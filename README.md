@@ -4,7 +4,7 @@
 
 Front-end for a book and video lending service.
 
-[Go to the Back-end (NodeJS)](https://github.com/Sachindra2002/lend-a-book-server)
+Link to [Back-end (NodeJS)](https://github.com/Sachindra2002/lend-a-book-server)
 
 ![homepage books](https://user-images.githubusercontent.com/52739523/156985737-5764c251-9c22-4d9c-b5bc-6ee5fcb9f801.png)
 
