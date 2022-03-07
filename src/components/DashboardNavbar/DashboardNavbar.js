@@ -36,7 +36,16 @@ const DashboardNavbar = (props) => {
     ) {
       props.setDashboard(5);
     } else if (id === "purchase-books-button" || id === "purchase-books-icon") {
-      props.setDashboard(7)
+      props.setDashboard(7);
+    } else if (
+      id === "purchase-movies-button" ||
+      id === "purchase-movies-icon"
+    ) {
+      props.setDashboard(8);
+    } else if (id === "google-books-button" || id === "google-books-icon") {
+      props.setDashboard(9);
+    } else if (id === "book-repo-button" || id === "book-repo-icon") {
+      props.setDashboard(10);
     }
   };
 
@@ -172,6 +181,70 @@ const DashboardNavbar = (props) => {
             <span id="purchase-books-icon" onClick={handleSetDashboard}>
               <i className="fa fa-cart-plus icon"></i>
               Puchase Books
+            </span>
+          </Button>
+        </Nav.Item>
+        <Nav.Item className="sidebar-item">
+          <Button
+            variant="dark"
+            className={`sidebar-button ${
+              dashboard === 8 && "sidebar-button-active"
+            }`}
+            size="lg"
+            id="purchase-movies-button"
+            onClick={handleSetDashboard}
+          >
+            <span id="purchase-movies-icon" onClick={handleSetDashboard}>
+              <i className="fa fa-cart-plus icon"></i>
+              Puchase Movies
+            </span>
+          </Button>
+        </Nav.Item>
+        <Nav.Item className="sidebar-item">
+          <Button
+            variant="dark"
+            className={`sidebar-button ${
+              dashboard === 9 && "sidebar-button-active"
+            }`}
+            size="lg"
+            id="google-books-button"
+            onClick={handleSetDashboard}
+          >
+            <span id="google-books-icon" onClick={handleSetDashboard}>
+              <i className="fa fa-search icon"></i>
+              Search Books
+            </span>
+          </Button>
+        </Nav.Item>
+        <Nav.Item className="sidebar-item">
+          <Button
+            variant="dark"
+            className={`sidebar-button ${
+              dashboard === 10 && "sidebar-button-active"
+            }`}
+            size="lg"
+            id="book-repo-button"
+            onClick={handleSetDashboard}
+          >
+            <span id="book-repo-icon" onClick={handleSetDashboard}>
+              <i className="fa fa-archive icon"></i>
+              Book Repository
+            </span>
+          </Button>
+        </Nav.Item>
+        <Nav.Item className="sidebar-item">
+          <Button
+            variant="dark"
+            className={`sidebar-button ${
+              dashboard === 11 && "sidebar-button-active"
+            }`}
+            size="lg"
+            id="movie-books-button"
+            onClick={handleSetDashboard}
+          >
+            <span id="movie-books-icon" onClick={handleSetDashboard}>
+              <i className="fa fa-archive icon"></i>
+              Movie Repository
             </span>
           </Button>
         </Nav.Item>

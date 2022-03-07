@@ -5,6 +5,8 @@ exports.BOOK_TYPES = [
   { id: "fantasy", name: "fantasy" },
   { id: "horror", name: "horror" },
   { id: "adventure", name: "adventure" },
+  { id: "Comic", name: "Comic" },
+  { id: "Novel", name: "Novel" },
 ];
 
 exports.MOVIE_TYPES = [

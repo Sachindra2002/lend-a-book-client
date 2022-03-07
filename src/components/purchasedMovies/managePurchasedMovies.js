@@ -14,63 +14,63 @@ import PropTypes from "prop-types";
 
 //REDUX
 import { connect } from "react-redux";
-import { getAllCSVBooks } from "../../redux/actions/dataActions";
+import { getAllCSVMovies } from "../../redux/actions/dataActions";
 
-import CSVBookCard from "./csvBookCard";
+import CsvMovieCard from "./csvMovieCard";
 
 function ManagePurchaseBooks(props) {
-  const [_books, setBooks] = useState([]);
-  const [bookPool, setBookPool] = useState([]);
+  const [_movies, setMovies] = useState([]);
+  const [moviePool, setMoviePool] = useState([]);
 
   const {
-    data: { books, loading },
+    data: { movies, loading },
   } = props;
 
   //When component is initiated, get all books from the backend
   useEffect(() => {
-    props.getAllCSVBooks();
+    props.getAllCSVMovies();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   //When book list is passed from props are updated, update state variables
   useEffect(() => {
-    if (books) {
-      setBooks(books);
-      setBookPool(books);
+    if (movies) {
+      setMovies(movies);
+      setMoviePool(movies);
     }
-  }, [books]);
+  }, [movies]);
 
   //Function to create a list of book cards from book list in state
-  let booksMarkup = _books.map((book) => (
-    <CSVBookCard key={book.isbn} book={book} />
+  let moviesMarkup = _movies.map((movie) => (
+    <CsvMovieCard key={movie.id} movie={movie} />
   ));
 
   //Function to search books
   const search = (input) => {
     //Get a copy of state
-    const bookCopy = bookPool.map((book) => book);
+    const movieCopy = moviePool.map((movie) => movie);
 
     //Array of search string after splitting by spaces
     const inputs = input.toLowerCase().split(" ");
 
     //Book title, author, book name and isbn will be searched through
-    const searchKeys = ["bookTitle", "authorName", "bookName", "isbn"];
-    let booksArray = [];
+    const searchKeys = ["movieName", "director"];
+    let moviesArray = [];
 
     //If search criteria is null reset books to display all books
     if (inputs.length === 1 && inputs[0] === "") {
-      booksArray = bookCopy;
+      moviesArray = movieCopy;
     }
     //If serach criteria is entered
     else {
       //Filter through book list to find matches
       inputs.forEach((word) => {
-        bookCopy.filter((item) => {
+        movieCopy.filter((item) => {
           // eslint-disable-next-line array-callback-return
           return Object.keys(item).some((key) => {
             if (searchKeys.includes(key)) {
               if (word.length > 0 && item[key].toLowerCase().includes(word))
-                if (item) booksArray.push(item);
+                if (item) moviesArray.push(item);
             }
           });
         });
@@ -78,15 +78,15 @@ function ManagePurchaseBooks(props) {
     }
 
     //Remove duplicates and set state to be displayed
-    const result = [...new Set(booksArray)];
-    setBooks(result);
+    const result = [...new Set(moviesArray)];
+    setMovies(result);
   };
 
   return (
     <div>
       <Card className="search-box-users">
         <Card.Body>
-          <Card.Title>Search for Books</Card.Title>
+          <Card.Title>Search for Movies</Card.Title>
           <Row>
             <Col xs={5}>
               <InputGroup>
@@ -110,7 +110,7 @@ function ManagePurchaseBooks(props) {
         {loading ? (
           <p>Loading...</p>
         ) : (
-          booksMarkup.map((card, index) => (
+          moviesMarkup.map((card, index) => (
             <Col lg={4} md={4} sm={4} key={index}>
               {" "}
               {card}{" "}
@@ -123,7 +123,7 @@ function ManagePurchaseBooks(props) {
 }
 
 ManagePurchaseBooks.propTypes = {
-  getAllCSVBooks: PropTypes.func.isRequired,
+  getAllCSVMovies: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -131,7 +131,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapActionsToProps = {
-  getAllCSVBooks,
+  getAllCSVMovies,
 };
 
 export default connect(

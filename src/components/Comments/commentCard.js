@@ -6,10 +6,13 @@ import {
   Popover,
   Modal,
   Alert,
+  Button,
 } from "react-bootstrap";
 import PropTypes from "prop-types";
 import dayjs from "dayjs";
+
 import { connect } from "react-redux";
+import { deleteComment } from "../../redux/actions/dataActions";
 
 import "./commentCard.css";
 
@@ -20,6 +23,12 @@ function CommentCard(props) {
     user,
     comment,
   } = props;
+
+  const handleDelete = async (event) => {
+    //Add comment to the backend
+    let result = await props.deleteComment(comment.id);
+  };
+
   return (
     <Fragment>
       {loading ? (
@@ -39,9 +48,13 @@ function CommentCard(props) {
                   })
                   .toString()}`}{" "}
                 {comment.email === user.email && (
-                  <span style={{ marginLeft: "10px" }}>
-                    <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
-                  </span>
+                  <Button
+                    onClick={handleDelete}
+                    style={{ width: 50, marginLeft: 20 }}
+                    variant="outline-danger"
+                  >
+                    <i class="fas fa-trash-alt"></i>
+                  </Button>
                 )}
               </span>
               <br />
@@ -49,9 +62,6 @@ function CommentCard(props) {
               <span>
                 {"  "}
                 {comment.content}
-              </span>
-              <span style={{ float: "right" }}>
-                <i class="fas fa-heart"></i>
               </span>
             </Card.Body>
           </Card>
@@ -65,6 +75,7 @@ CommentCard.propTypes = {
   user: PropTypes.object,
   comment: PropTypes.object,
   UI: PropTypes.object.isRequired,
+  deleteComment: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -73,6 +84,8 @@ const mapStateToProps = (state) => ({
   UI: state.UI,
 });
 
-const mapActionsToProp = {};
+const mapActionsToProp = {
+  deleteComment
+};
 
 export default connect(mapStateToProps, mapActionsToProp)(CommentCard);

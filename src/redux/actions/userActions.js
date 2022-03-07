@@ -19,8 +19,10 @@ export const registerUser = (user_data, history) => async (dispatch) => {
 
   try {
     let results = await axios.post("/signup", user_data);
+    setAuthorizationHeader(results.data.token);
+    await dispatch(getUserData());
     dispatch({ type: CLEAR_ERRORS });
-    history.push("/sign-in");
+    history.push("/homepage");
   } catch (error) {
     dispatch({
       type: SET_ERRORS,

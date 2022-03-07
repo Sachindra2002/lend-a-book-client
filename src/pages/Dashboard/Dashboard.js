@@ -20,6 +20,12 @@ import ManageBookReservation from "../../components/ManageBooksReservation/manag
 import ManageCompareBookPrices from "../../components/CompareBookPrices/manageCompareBookPrices";
 
 import ManagePurchaseBooks from "../../components/PurchaseBooks/managaPurchaseBooks";
+import ManagePurchasedMovies from "../../components/purchasedMovies/managePurchasedMovies";
+
+import ManageGoogleBooks from "../../components/GoogleBooks/manageGoogleBooks";
+
+import ManageBookRepository from "../../components/BookRepository/manageBookRepository";
+
 //Redux
 import { connect } from "react-redux";
 
@@ -47,6 +53,18 @@ const Dashboard = (props) => {
           ) : dashboard === 7 ? (
             <Col xs={10} id="page-content-wrapper">
               <ManagePurchaseBooks />
+            </Col>
+          ) : dashboard === 8 ? (
+            <Col xs={10} id="page-content-wrapper">
+              <ManagePurchasedMovies />
+            </Col>
+          ) : dashboard === 9 ? (
+            <Col xs={10} id="page-content-wrapper">
+              <ManageGoogleBooks />
+            </Col>
+          ) : dashboard === 10 ? (
+            <Col xs={10} id="page-content-wrapper">
+              <ManageBookRepository />
             </Col>
           ) : (
             <>

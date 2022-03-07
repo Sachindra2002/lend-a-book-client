@@ -12,17 +12,17 @@ import "./cart.css";
 
 import { connect } from "react-redux";
 import AuthenticatedNavbar from "../AuthenticatedNavbar/AuthenticatedNavbar";
-import { reserveBooks } from "../../redux/actions/dataActions";
+import { reserveMovies } from "../../redux/actions/dataActions";
 import { removeFromCart } from "../../redux/actions/cartAction";
 
 function CartScreen(props) {
   const [reservationDate, setReservationDate] = useState("");
   const [errors, setErrors] = useState({});
   const dispatch = useDispatch();
-  const cart = useSelector((state) => state.cart);
+  const cart = useSelector((state) => state.movie_cart);
   const user = useSelector((state) => state.user);
   const { cartItems } = cart;
-  const books = { cartItems };
+  const movies = { cartItems };
 
   //update state with errors
   useEffect(() => {
@@ -47,22 +47,22 @@ function CartScreen(props) {
   const getTotal = () => {
     console.log(user);
     if (user.Subscription.membershipOption === "bronze") {
-      const price = cartItems.length * 50;
+      const price = cartItems.length * 100;
       return price;
     } else if (user.Subscription.membershipOption === "gold") {
-      const price = cartItems.length * 30;
+      const price = cartItems.length * 60;
       return price;
     } else if (user.Subscription.membershipOption === "silver") {
-      const price = cartItems.length * 40;
+      const price = cartItems.length * 80;
       return price;
     } else if (user.Subscription.membershipOption === "platinum") {
-      const price = cartItems.length * 20;
+      const price = cartItems.length * 40;
       return price;
     }
   };
 
-  const removeFromCartHandler = (isbn) => {
-    dispatch(removeFromCart(isbn));
+  const removeFromCartHandler = (id) => {
+    dispatch(removeFromCart(id));
   };
 
   const handleSubmit = async (event) => {
@@ -70,17 +70,17 @@ function CartScreen(props) {
     const data = {
       reservationDate: reservationDate,
       charges: getTotal(),
-      books: books,
+      movies: movies,
     };
     console.log(data);
 
-    props.reserveBooks(data, props.history);
+    props.reserveMovies(data, props.history);
   };
 
   return (
     <div>
       <AuthenticatedNavbar />
-
+      
       <div className="header">Your Cart</div>
       <div className="cards_checkout">
         {cartItems.length === 0 ? (
@@ -119,7 +119,7 @@ function CartScreen(props) {
 }
 
 CartScreen.propTypes = {
-  reserveBooks: PropTypes.func.isRequired,
+  reserveMovies: PropTypes.func.isRequired,
   UI: PropTypes.object.isRequired,
 };
 const mapStateToProps = (state) => ({
@@ -127,7 +127,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapActionsToProps = {
-  reserveBooks,
+  reserveMovies,
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(CartScreen);

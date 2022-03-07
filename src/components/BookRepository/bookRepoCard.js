@@ -7,8 +7,8 @@ import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 import { pdfjs } from "react-pdf";
 
 //REDUX
-import { addBookFromCSV } from "../../redux/actions/dataActions";
 import { connect } from "react-redux";
+import { addBookFromMongo } from "../../redux/actions/dataActions";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
@@ -17,7 +17,7 @@ const options = {
   cMapPacked: true,
 };
 
-function CSVBookCard(props) {
+function BookRepoCard(props) {
   const [bookModalShow, setBookModalShow] = useState(false);
   const [bookFileModalShow, setBookFileModalShow] = useState(false);
   const [numPages, setNumPages] = useState(null);
@@ -41,13 +41,14 @@ function CSVBookCard(props) {
   }
 
   const {
+    _id,
     isbn,
     bookName,
     bookSummary,
     bookGenre,
     authorName,
     bookYear,
-    Publisher,
+    publisher,
     isAvailable,
     bookFile,
     bookImage,
@@ -62,14 +63,14 @@ function CSVBookCard(props) {
       bookGenre,
       authorName,
       bookYear,
-      Publisher,
+      Publisher: publisher,
       isAvailable,
       bookFile,
       bookImage,
       is18,
     };
 
-    let results = await props.addBookFromCSV(book);
+    let results = await props.addBookFromMongo(book);
   };
 
   return (
@@ -153,7 +154,7 @@ function CSVBookCard(props) {
                   </div>
                   <br />
                   <div style={{ fontSize: 17, marginTop: -30 }}>
-                    Publisher : {Publisher}
+                    Publisher : {publisher}
                   </div>
                   <br />
                   <Row>
@@ -221,8 +222,8 @@ function CSVBookCard(props) {
   );
 }
 
-CSVBookCard.propTypes = {
-  addBookFromCSV: PropTypes.func.isRequired,
+BookRepoCard.propTypes = {
+  addBookFromMongo: PropTypes.func.isRequired,
   UI: PropTypes.func.isRequired,
 };
 
@@ -231,7 +232,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapActionsToProps = {
-  addBookFromCSV,
+  addBookFromMongo,
 };
 
-export default connect(mapStateToProps, mapActionsToProps)(CSVBookCard);
+export default connect(mapStateToProps, mapActionsToProps)(BookRepoCard);

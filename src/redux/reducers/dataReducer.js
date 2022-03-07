@@ -13,6 +13,10 @@ import {
   SET_BOOK_RESERVATIONS,
   SET_SCRAPED_BOOKS,
   SET_CSV_BOOKS,
+  SET_GOOGLE_BOOKS,
+  SET_MONGO_BOOKS,
+  SET_CSV_MOVIES,
+  SET_RESERVATIONS,
 } from "../types";
 
 const initialState = {
@@ -78,10 +82,35 @@ export default function (state = initialState, action) {
         books: action.payload,
         loading: false,
       };
+
+    case SET_RESERVATIONS:
+      return {
+        ...state,
+        reservations: action.payload,
+        loading: false,
+      };
+    case SET_GOOGLE_BOOKS:
+      return {
+        ...state,
+        books: action.payload,
+        loading: false,
+      };
+    case SET_MONGO_BOOKS:
+      return {
+        ...state,
+        mongo_books: action.payload,
+        loading: false,
+      };
     case SET_CSV_BOOKS:
       return {
         ...state,
         books: action.payload,
+        loading: false,
+      };
+    case SET_CSV_MOVIES:
+      return {
+        ...state,
+        movies: action.payload,
         loading: false,
       };
     case SET_USER_MOVIES:

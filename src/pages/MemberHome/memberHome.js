@@ -12,6 +12,8 @@ import AuthenticatedNavbar from "../../components/AuthenticatedNavbar/Authentica
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import "./memberHome.css";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import Footer from "../../components/homepageFooter/Footer";
 
@@ -35,21 +37,20 @@ function MemberHome(props) {
   return (
     <>
       <AuthenticatedNavbar />
+      <ToastContainer />
       <div>
         <Alert
           variant="danger"
           className="not-verified-message"
           hidden={props.isVerified}
-          style={{ marginLeft: "10px", marginRight: "10px"}}
+          style={{ marginLeft: "10px", marginRight: "10px" }}
         >
           {`Hello ${props.firstName} ${props.lastName}! `}
           You are <b>not verified,</b> You will not be able to do any
           reservations until human verification is passed.{" "}
         </Alert>
       </div>
-      <div className="greeting-name">
-        Welcome Back, {props.firstName}
-      </div>
+      <div className="greeting-name">Welcome Back, {props.firstName}</div>
       <Container fluid>
         <>
           <Col id="page-content-wrapper">

@@ -15,6 +15,20 @@ export const addToCart = (id, qty) => async (dispatch, getState) => {
   localStorage.setItem("cart", JSON.stringify(getState().cart.cartItems));
 };
 
+export const addMovieToCart = (id, qty) => async (dispatch, getState) => {
+  const { data } = await axios.get(`/movie/${id}`);
+
+  dispatch({
+    type: actionTypes.ADD_MOVIE_TO_CART,
+    payload: {
+      isbn: data.id,
+      image: data.movieImage
+    },
+  });
+
+  localStorage.setItem("movie_cart", JSON.stringify(getState().movie_cart.movie_cart_items));
+};
+
 export const removeFromCart = (id) => (dispatch, getState) => {
   dispatch({
     type: actionTypes.REMOVE_FROM_CART,

@@ -24,7 +24,7 @@ function CompareBookPricesCard(props) {
           {price}
         </span>
         <br />
-        <Button variant="outline-primary">View Book</Button>
+        <Button href={link} variant="outline-primary">View Book</Button>
       </Card.Body>
     </Card>
   );

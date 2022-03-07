@@ -4,7 +4,7 @@ import thunk from "redux-thunk";
 import userReducer from "./reducers/userReducer";
 import dataReducer from "./reducers/dataReducer";
 import uiReducer from "./reducers/uiReducer";
-import { cartReducer } from "./reducers/cartReducer";
+import { cartReducer, movieCartReducer } from "./reducers/cartReducer";
 
 const initialState = {};
 
@@ -14,6 +14,7 @@ const reducers = combineReducers({
   user: userReducer,
   data: dataReducer,
   cart: cartReducer,
+  movie_cart: movieCartReducer,
   UI: uiReducer,
 });
 

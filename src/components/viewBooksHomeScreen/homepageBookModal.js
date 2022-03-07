@@ -21,6 +21,7 @@ import Comments from "../../components/Comments/comments";
 //REDUX
 import { connect } from "react-redux";
 import { addToCart } from "../../redux/actions/cartAction";
+import { toast } from "react-toastify";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
@@ -60,6 +61,14 @@ function HomepageBookModal(props) {
     changePage(1);
   }
 
+  const SuccessToaster = () => {
+    toast.success("Book added to cart successfully!", {
+      position: toast.POSITION.TOP_RIGHT,
+      autoClose: 4000,
+      draggable: false,
+    });
+  };
+
   //When errors are updated the component is re-rendered to display errors
   useEffect(() => {
     props.UI.rent_errors
@@ -74,7 +83,7 @@ function HomepageBookModal(props) {
 
   const addToCartHandler = () => {
     dispatch(addToCart(book.isbn, 1));
-    history.push("/cart");
+    SuccessToaster();
   };
   const newProps = { ...props };
 

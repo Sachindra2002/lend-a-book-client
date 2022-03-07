@@ -37,13 +37,13 @@ function AuthenticatedNavbar(props) {
 
             <li>
               {isVerified && (
-                <Link className="myreservation-button" to="/cart">
+                <Link className="myreservation-button" to="/my-reservations">
                   My Reservations
                 </Link>
               )}
             </li>
             <li>
-              <Link className="myreservation-button" onClick="">
+              <Link className="myreservation-button" to="/profile">
                 My Profile
               </Link>
             </li>

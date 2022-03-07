@@ -3,6 +3,7 @@ import { Form } from "react-bootstrap";
 import PropTypes from "prop-types";
 import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/Navbar/Navbar";
+import { useHistory } from "react-router-dom";
 import "./signup.css";
 
 //REDUX
@@ -24,6 +25,8 @@ function Register(props) {
   const [totalAmount, setTotalAmount] = useState("");
   const [file, setFile] = useState();
   const [errors, setErrors] = useState({});
+
+  let history = useHistory();
 
   //Function to generate form control inputs for each field
   const useInput = ({

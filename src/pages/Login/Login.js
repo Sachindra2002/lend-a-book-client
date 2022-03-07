@@ -13,6 +13,7 @@ function Login(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
+  const [success, setSucccess] = useState("")
 
   const useInput = ({
     type,
@@ -64,7 +65,7 @@ function Login(props) {
     props.loginUser(data, props.history);
   };
 
-  //Generate fields usinf function
+  //Generate fields using function
 
   const emailInput = useInput({
     type: "email",
@@ -99,6 +100,7 @@ function Login(props) {
               LOGIN
             </button>
           </div>
+          <p>{success}</p>
         </Form>
       </div>
       <Footer />

@@ -18,8 +18,8 @@ const CartItem = ({ item }) => {
     <>
       <Card className="cartCard">
         <Card.Body>
-          <img className="cartImage" src={item.image} />
-          <h4 className="isbn">ISBN {item.isbn}</h4>
+          <img className="cartImage" src={item.movieImage} />
+          <h4 className="isbn">ID {item.id}</h4>
           <Button variant="outline-danger" className="cartButton">
             <i class="fas fa-trash-alt"></i>
           </Button>

@@ -9,6 +9,7 @@ import {
   Dropdown,
 } from "react-bootstrap";
 import PropTypes from "prop-types";
+import { Link, useHistory } from "react-router-dom";
 
 //REDUX
 import { connect } from "react-redux";
@@ -24,6 +25,8 @@ function ManageHomepageMovies(props) {
   const [_movies, setmovies] = useState([]);
   const [moviePool, setMoviePool] = useState([]);
   const [genre, setGenre] = useState("Movie Genre");
+
+  let history = useHistory();
 
   const {
     data: { movies, loading },
@@ -113,6 +116,10 @@ function ManageHomepageMovies(props) {
     setMoviePool(movies);
   };
 
+  const handleClick = () => {
+    history.push("/movie-cart")
+  }
+
   //Drop down for select genre of movie
   const genreDropdownmarkup = MOVIE_TYPES.map((type, index) => (
     <Dropdown.Item
@@ -155,22 +162,6 @@ function ManageHomepageMovies(props) {
                 </Dropdown.Toggle>
                 <Dropdown.Menu>{genreDropdownmarkup}</Dropdown.Menu>
               </Dropdown>
-              <Dropdown className="homepage-dropdown">
-                <Dropdown.Toggle
-                  variant="outline-secondary"
-                  id="dropdown-basic"
-                  style={{ width: "100%" }}
-                >
-                  Rating
-                </Dropdown.Toggle>
-                <Dropdown.Menu>
-                  <Dropdown.Item>1 Star</Dropdown.Item>
-                  <Dropdown.Item>2 Star</Dropdown.Item>
-                  <Dropdown.Item>3 Star</Dropdown.Item>
-                  <Dropdown.Item>4 Star</Dropdown.Item>
-                  <Dropdown.Item>5 Star</Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
               <Button
                 variant="outline-danger"
                 className="homepage-dropdown"
@@ -180,6 +171,13 @@ function ManageHomepageMovies(props) {
                   <i className="fas fa-times reset-icon"></i>
                 </span>
                 Reset
+              </Button>{" "}
+              <Button
+                variant="outline-primary"
+                className="homepage-dropdown"
+                onClick={handleClick}
+              >
+                Check Cart
               </Button>{" "}
             </Row>
           </Col>

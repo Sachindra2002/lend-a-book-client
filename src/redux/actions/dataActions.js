@@ -1,4 +1,5 @@
 import axios from "axios";
+import superagent from "superagent";
 
 import {
   SET_USERS,
@@ -16,6 +17,10 @@ import {
   SET_BOOK_RESERVATIONS,
   SET_SCRAPED_BOOKS,
   SET_CSV_BOOKS,
+  SET_GOOGLE_BOOKS,
+  SET_MONGO_BOOKS,
+  SET_CSV_MOVIES,
+  SET_RESERVATIONS,
 } from "../types";
 import { getUserPersonalizedBooks } from "./userActions";
 
@@ -125,6 +130,20 @@ export const addBookFromCSV = (book) => async (dispatch) => {
 
   try {
     let results = await axios.post("/add-book", book);
+    await dispatch(getAllCSVBooks());
+  } catch (error) {
+    dispatch({
+      type: SET_ERRORS,
+      payload: error.response.data,
+    });
+  }
+};
+
+export const addBookFromMongo = (book) => async (dispatch) => {
+  dispatch({ type: LOADING_UI });
+
+  try {
+    let results = await axios.post("/add-book-to-mongo-sql", book);
     await dispatch(getAllCSVBooks());
   } catch (error) {
     dispatch({
@@ -269,6 +288,21 @@ export const reserveBooks = (data, history) => async (dispatch) => {
   }
 };
 
+export const reserveMovies = (data, history) => async (dispatch) => {
+  dispatch({ type: LOADING_UI });
+
+  try {
+    let results = await axios.post("/reserve-movies", data);
+    dispatch({ type: CLEAR_ERRORS });
+    history.push("/homepage");
+  } catch (error) {
+    dispatch({
+      type: SET_ERRORS,
+      payload: error.response?.data,
+    });
+  }
+};
+
 export const getAllBookReservations = () => async (dispatch) => {
   dispatch({ type: LOADING_DATA });
   try {
@@ -319,6 +353,107 @@ export const getAllCSVBooks = () => async (dispatch) => {
     });
   } catch (error) {
     dispatch({ type: SET_CSV_BOOKS, payload: [] });
+    console.log(error);
+  }
+};
+
+/* Get all movies in CSV file */
+export const getAllCSVMovies = () => async (dispatch) => {
+  dispatch({ type: LOADING_DATA });
+  try {
+    let results = await axios.get("/purchased-movies");
+    dispatch({
+      type: SET_CSV_MOVIES,
+      payload: results.data.movies,
+    });
+  } catch (error) {
+    dispatch({ type: SET_CSV_MOVIES, payload: [] });
+    console.log(error);
+  }
+};
+
+/* Get books from google books API */
+export const getBookFromGoogleBooksApi = (searchKey) => async (dispatch) => {
+  let query = searchKey;
+  const apiKey = "AIzaSyDOHNA4IMwTzWuGCUuJ4hea-vyPOP-giOM";
+  let url =
+    "https://www.googleapis.com/books/v1/volumes?q=" +
+    query +
+    "&maxResults=40&key=" +
+    apiKey;
+
+  if (searchKey != null) {
+    dispatch({ type: LOADING_DATA });
+    try {
+      let results = await superagent.get(url);
+      console.log(results.body);
+      dispatch({
+        type: SET_GOOGLE_BOOKS,
+        payload: results.body.items,
+      });
+    } catch (error) {
+      dispatch({ type: SET_GOOGLE_BOOKS, payload: [] });
+      console.log(error);
+    }
+  }
+};
+
+/* Get books from Secondary Database*/
+export const getAllMongoBooks = () => async (dispatch) => {
+  dispatch({ type: LOADING_DATA });
+  try {
+    let results = await axios.get("/mongo-books");
+    dispatch({
+      type: SET_MONGO_BOOKS,
+      payload: results.data.books,
+    });
+  } catch (error) {
+    dispatch({ type: SET_MONGO_BOOKS, payload: [] });
+    console.log(error);
+  }
+};
+
+/* Add Comment to a Book */
+export const addComment = (data) => async (dispatch) => {
+  dispatch({ type: LOADING_UI });
+
+  try {
+    let results = await axios.post("/add-comment", data);
+    await dispatch(getAllBooks());
+    dispatch({ type: CLEAR_ERRORS });
+
+    //Prevent modal from closing after errors are displayed
+    if (results.data.isbn) return true;
+  } catch (error) {
+    dispatch({
+      type: SET_ERRORS,
+      payload: error.response.data,
+    });
+  }
+};
+
+/* Delete a comment */
+export const deleteComment = (id) => async (dispatch) => {
+  try {
+    await axios.post(`/delete-comment/${id}`);
+    dispatch(getAllBooks());
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+/* Get Bookreservations of logged in user */
+export const getMyBookReservations = () => async (dispatch) => {
+  dispatch({ type: LOADING_DATA });
+  try {
+    let results = await axios.get("/my-bookReservations");
+    console.log(results.data);
+    dispatch({
+      type: SET_RESERVATIONS,
+      payload: results.data.reservations,
+    });
+  } catch (error) {
+    dispatch({ type: SET_RESERVATIONS, payload: [] });
     console.log(error);
   }
 };

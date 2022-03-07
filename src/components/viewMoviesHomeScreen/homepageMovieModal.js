@@ -16,6 +16,8 @@ import PropTypes from "prop-types";
 
 //REDUX
 import { connect } from "react-redux";
+import { addMovieToCart } from "../../redux/actions/cartAction";
+import { toast } from "react-toastify";
 
 function HomepageMovieModal(props) {
   let history = useHistory();
@@ -39,6 +41,19 @@ function HomepageMovieModal(props) {
   //Handle Submit
   const handleMakeReservation = async (event) => {
     event.preventDefault();
+  };
+
+  const SuccessToaster = () => {
+    toast.success("Movie added to cart successfully!", {
+      position: toast.POSITION.TOP_RIGHT,
+      autoClose: 4000,
+      draggable: false,
+    });
+  };
+
+  const addToCartHandler = () => {
+    dispatch(addMovieToCart(movie.id, 1));
+    SuccessToaster();
   };
 
   const newProps = { ...props };
@@ -95,7 +110,7 @@ function HomepageMovieModal(props) {
                   </Col>
                   <Col>
                     <div>
-                      <Button variant="primary" >
+                      <Button onClick={addToCartHandler} variant="primary" >
                         Reserve Now
                       </Button>
                     </div>
